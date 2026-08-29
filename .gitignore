@@ -1,0 +1,16 @@
+# --- vendored tmux plugins (nested git repos; tpm restores them) ---
+.config/tmux/plugins/
+
+# --- unused tool configs (kept on disk, not tracked) ---
+.config/alacritty/
+.config/helix/
+.config/spaceship/
+.config/wezterm/
+.config/lvim/
+
+# --- cruft ---
+.DS_Store
+*.zwc
+*.bak
+*.swp
+*~
