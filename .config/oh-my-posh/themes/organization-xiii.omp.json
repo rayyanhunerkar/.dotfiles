@@ -20,28 +20,71 @@
         {
           "type": "path",
           "style": "plain",
-          "foreground": "p:blue",
+          "foreground": "p:gold",
           "properties": {
             "style": "folder"
           },
-          "template": "<p:gold>󰄖 </><b>{{ .Path }}</b>"
+          "template": "<b>{{ .Path }}</b>"
         },
         {
           "type": "git",
           "style": "plain",
           "foreground": "p:cyan",
           "properties": {
-            "branch_icon": " ",
-            "fetch_status": true,
-            "fetch_upstream_icon": true
+            "branch_icon": "",
+            "fetch_status": true
           },
-          "template": " <b>{{ .HEAD }}</b>{{ if or (.Working.Changed) (.Staging.Changed) }}<p:gold> </>{{ end }}{{ if gt .Behind 0 }}<p:pink> ↓{{ .Behind }}</p:pink>{{ end }}{{ if gt .Ahead 0 }}<p:pink> ↑{{ .Ahead }}</p:pink>{{ end }}"
+          "template": " <p:dim>—</> {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}<p:red> ·</>{{ end }}{{ if gt .Behind 0 }}<p:dim> ↓{{ .Behind }}</p:dim>{{ end }}{{ if gt .Ahead 0 }}<p:dim> ↑{{ .Ahead }}</p:dim>{{ end }}"
+        },
+        {
+          "type": "node",
+          "style": "plain",
+          "foreground": "p:dim",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          },
+          "template": " <p:dim>—</> {{ .Full }}"
+        },
+        {
+          "type": "python",
+          "style": "plain",
+          "foreground": "p:dim",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          },
+          "template": " <p:dim>—</> {{ .Full }}"
+        },
+        {
+          "type": "golang",
+          "style": "plain",
+          "foreground": "p:dim",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          },
+          "template": " <p:dim>—</> {{ .Full }}"
+        },
+        {
+          "type": "rust",
+          "style": "plain",
+          "foreground": "p:dim",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          },
+          "template": " <p:dim>—</> {{ .Full }}"
         },
         {
           "type": "root",
           "style": "plain",
           "foreground": "p:red",
-          "template": "  "
+          "template": " <p:red>— root</>"
         },
         {
           "type": "executiontime",
@@ -51,7 +94,7 @@
             "threshold": 2000,
             "style": "austin"
           },
-          "template": " <p:dim>{{ .FormattedMs }}</>"
+          "template": " <p:dim>— {{ .FormattedMs }}</>"
         }
       ]
     },
@@ -67,7 +110,22 @@
           "properties": {
             "always_enabled": true
           },
-          "template": "{{ if .Error }}<p:red> ❯</>{{ else }}<p:cyan>❯</>{{ end }}"
+          "template": "{{ if .Error }}<p:red>{{ .Code }} »</>{{ else }}<p:cyan>»</>{{ end }}"
+        }
+      ]
+    },
+    {
+      "type": "rprompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "type": "time",
+          "style": "plain",
+          "foreground": "p:dim",
+          "properties": {
+            "time_format": "15:04"
+          },
+          "template": " {{ .CurrentDate | date .Format }}"
         }
       ]
     }

@@ -38,6 +38,50 @@
           "template": " <b>{{ .HEAD }}</b>{{ if or (.Working.Changed) (.Staging.Changed) }}<p:gold> </>{{ end }}{{ if gt .Behind 0 }}<p:pink> ↓{{ .Behind }}</p:pink>{{ end }}{{ if gt .Ahead 0 }}<p:pink> ↑{{ .Ahead }}</p:pink>{{ end }}"
         },
         {
+          "type": "node",
+          "style": "plain",
+          "foreground": "p:dim",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          },
+          "template": "  {{ .Full }}"
+        },
+        {
+          "type": "python",
+          "style": "plain",
+          "foreground": "p:dim",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          },
+          "template": "  {{ .Full }}"
+        },
+        {
+          "type": "golang",
+          "style": "plain",
+          "foreground": "p:dim",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          },
+          "template": "  {{ .Full }}"
+        },
+        {
+          "type": "rust",
+          "style": "plain",
+          "foreground": "p:dim",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          },
+          "template": "  {{ .Full }}"
+        },
+        {
           "type": "root",
           "style": "plain",
           "foreground": "p:red",
@@ -67,7 +111,22 @@
           "properties": {
             "always_enabled": true
           },
-          "template": "{{ if .Error }}<p:red> ❯</>{{ else }}<p:cyan>❯</>{{ end }}"
+          "template": "{{ if .Error }}<p:red>{{ .Code }} ❯</>{{ else }}<p:cyan>❯</>{{ end }}"
+        }
+      ]
+    },
+    {
+      "type": "rprompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "type": "time",
+          "style": "plain",
+          "foreground": "p:dim",
+          "properties": {
+            "time_format": "15:04"
+          },
+          "template": " {{ .CurrentDate | date .Format }}"
         }
       ]
     }

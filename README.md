@@ -1,6 +1,7 @@
 # dotfiles
 
-Kingdom Hearts themes across the terminal stack — switchable.
+Themed terminal stack — switchable across kitty, tmux, oh-my-posh and fastfetch
+with one command.
 
 | Tool | Path | Notes |
 |------|------|-------|
@@ -13,7 +14,7 @@ Kingdom Hearts themes across the terminal stack — switchable.
 ## Themes
 
 ```sh
-set-theme <dive-to-the-heart|organization-xiii>    # tab-completes
+set-theme <name>    # tab-completes
 ```
 
 Copies the theme's kitty/tmux/omp/fastfetch files into place (`current-theme.conf`,
@@ -25,13 +26,29 @@ Add a theme — drop a file with the same basename in each themes dir:
 
 | Dir | File | Note |
 |---|---|---|
-| `.config/kitty/themes/` | `<name>.conf` | 16 ANSI colors + cursor/border/tab |
+| `.config/kitty/themes/` | `<name>.conf` | 16 ANSI colors, cursor/border/tab, and `background_opacity`/`background_blur` |
 | `.config/tmux/themes/` | `<name>.conf` | full status bar (powerline segments) + pane/message/mode styles |
-| `.config/oh-my-posh/themes/` | `<name>.omp.json` | copy an existing one, swap only `palette` |
+| `.config/oh-my-posh/themes/` | `<name>.omp.json` | full prompt shape, not just colors — see below |
 | `.config/fastfetch/themes/` | `<name>.jsonc` | `keyColor` hex + logo `color` slots 1-5 |
 
 `set-theme` completes from `.config/kitty/themes/`, so a new theme shows up in tab
 completion as soon as its kitty file exists.
+
+### Prompt shapes
+
+Each theme defines its own prompt *structure*, not just a palette:
+
+| Theme | Shape | |
+|---|---|---|
+| dive-to-the-heart | minimal | `󰄖 .dotfiles   main ` |
+| organization-xiii | stark, no icons | `.dotfiles — main ·` |
+| twilight-town | powerline blocks | ` .dotfiles  main ` |
+| castle-oblivion | powerline blocks | ` .dotfiles  main ` |
+| erdtree | ornate, framed | `╭─  ~/.dotfiles ─  main` |
+
+All five share the same segments: path, git (dirty/ahead/behind), root, exec time
+over 2s, exit code on failure, and a clock in the right prompt. Node/Python/Go/Rust
+versions use `display_mode: files`, so they appear only inside that kind of project.
 
 **Dive to the Heart** — Station of Awakening. Midnight blue, cyan dive-glow, crown gold.
 ```
@@ -45,6 +62,29 @@ gold #f2c14e   pink  #ff8fb2   red #e0566b
 bg   #0b0b0d   fg     #e8e8ec
 blue #2e5c8a   cyan   #7fb0c9
 red  #c8102e   silver #b8bcc4   grey #6a6a75
+```
+
+**Twilight Town** — sunset over the clock tower. Warm dusk, sea-salt ice cream.
+```
+bg     #1a1220   fg     #ffe4c4
+orange #ff9e4f   amber  #ffc857
+teal   #4fd6be   purple #c98fd8   red #ff7a7a
+```
+
+**Castle Oblivion** — the light one. Parchment and ink, muted accents.
+```
+bg    #f4f1ea   fg    #2a2a33
+slate #5a6478   rose  #c96a72
+gold  #b8952f   sage  #6f8f7a
+```
+Its ANSI colors are dark by design so they read on the light ground, and it sets
+a much higher `background_opacity` — transparency turns a light theme muddy.
+
+**Erdtree** — Elden Ring. Ash and soot, Erdtree gold, glintstone blue.
+```
+bg    #14100c   fg     #e8dcc0
+gold  #d4a437   amber  #e8c56a
+glint #5aa8b8   blood  #b83232   moss #7a8a52
 ```
 
 ## Install
