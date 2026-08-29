@@ -20,3 +20,4 @@ zsh/.zsh_plugins.zsh
 .config/tmux/current-theme.conf
 .config/oh-my-posh/current.omp.json
 .config/fastfetch/config.jsonc
+zsh/.zshrc.local

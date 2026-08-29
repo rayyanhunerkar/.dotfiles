@@ -15,12 +15,19 @@ unset __conda_setup
 
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+command -v pyenv >/dev/null && eval "$(pyenv init -)"
 
-# NVM
+# NVM — lazy (sourcing it eagerly costs ~260ms)
 export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"                                       # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+_load_nvm() {
+  unset -f nvm node npm npx 2>/dev/null
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+}
+for _cmd in nvm node npm npx; do
+  eval "${_cmd}() { _load_nvm; ${_cmd} \"\$@\"; }"
+done
+unset _cmd
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -37,30 +44,42 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-eval "$(uv generate-shell-completion zsh)"
-eval "$(uvx --generate-shell-completion zsh)"
-
-eval "$(zoxide init zsh --cmd=cd)"
-
-
-export CERT="$HOME/Workspace/Morfius/certs"
-export DEV_IP="150.136.227.224"
-export VPN_IP="132.145.187.226"
+# uv/uvx completions — cached; regenerating both costs ~45ms per shell
+_uv_comp="$HOME/.cache/zsh/uv-completions.zsh"
+if command -v uv >/dev/null; then
+  if [[ ! -s $_uv_comp || $commands[uv] -nt $_uv_comp ]]; then
+    mkdir -p "${_uv_comp:h}"
+    { uv generate-shell-completion zsh; uvx --generate-shell-completion zsh; } > "$_uv_comp"
+  fi
+  source "$_uv_comp"
+fi
+unset _uv_comp
 
 # History
 HISTSIZE=50000
 SAVEHIST=50000
 setopt SHARE_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE HIST_EXPIRE_DUPS_FIRST HIST_VERIFY
 
+# Editor
+export EDITOR="nvim"
+export VISUAL="$EDITOR"
+alias vim="nvim"
+alias vi="nvim"
+
 # Aliases
 alias ff="fastfetch"
 alias zeload="source $HOME/.zshrc"
-alias ssh_dev="ssh -i $CERT/ssh-key-2024-01-15.key opc@$DEV_IP"
-alias ssh_vpn="ssh -i $CERT/vpn.key ubuntu@$VPN_IP"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# SDKMAN — lazy (sourcing it eagerly costs ~314ms)
 export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+_load_sdkman() {
+  unset -f sdk java javac gradle mvn kotlin scala 2>/dev/null
+  [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+}
+for _cmd in sdk java javac gradle mvn kotlin scala; do
+  eval "${_cmd}() { _load_sdkman; ${_cmd} \"\$@\"; }"
+done
+unset _cmd
 
 #PLUGINS
 source $HOME/.antidote/antidote.zsh
@@ -74,7 +93,16 @@ source ${zsh_plugins}.zsh
 export PATH="$HOME/.dotfiles/scripts:$PATH"
 fpath=("$HOME/.config/zsh/completions" $fpath)
 
-autoload -Uz compinit && compinit
+# compinit — full security scan only once a day, cached dump otherwise
+autoload -Uz compinit
+_zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
+if [[ -n $_zcompdump(#qN.mh+24) ]]; then
+  compinit -d "$_zcompdump"
+  touch "$_zcompdump"
+else
+  compinit -C -d "$_zcompdump"
+fi
+unset _zcompdump
 
 # fzf: CTRL-T (file finder) / ALT-C (cd finder) / CTRL-R (history, overrides
 # zsh-fzf-history-search's binding above)
@@ -93,4 +121,12 @@ fi
 alias set-theme="set-theme.sh"
 alias set-font="set-font.sh"
 
-eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/current.omp.json)"
+# zoxide must init near the end — it overrides `cd`, and anything sourced
+# after it (plugins, other cd wrappers) would clobber that.
+command -v zoxide >/dev/null && eval "$(zoxide init zsh --cmd=cd)"
+
+command -v oh-my-posh >/dev/null && \
+  eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/current.omp.json)"
+
+# Machine-local / private overrides (infra IPs, work aliases). Not tracked.
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
