@@ -1,0 +1,10 @@
+#compdef set-font.sh set-font
+
+_set-font() {
+  local fonts_dir="$HOME/.config/kitty/fonts"
+  local -a fonts
+  fonts=(${${(f)"$(print -l $fonts_dir/*.conf(:t:r) 2>/dev/null)"}})
+  _describe 'font' fonts
+}
+
+_set-font "$@"

@@ -1,0 +1,10 @@
+#compdef set-theme.sh set-theme
+
+_set-theme() {
+  local themes_dir="$HOME/.config/kitty/themes"
+  local -a themes
+  themes=(${${(f)"$(print -l $themes_dir/*.conf(:t:r) 2>/dev/null)"}})
+  _describe 'theme' themes
+}
+
+_set-theme "$@"

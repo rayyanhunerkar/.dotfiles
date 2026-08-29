@@ -1,0 +1,29 @@
+#Framework Bridge (Makes OMZ plugins work better with Antidote)
+ohmyzsh/ohmyzsh
+getantidote/use-omz
+
+
+#Performance & Intelligence (The Essentials)
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-history-substring-search
+zsh-users/zsh-completions
+
+# Productivity
+rupa/z
+ohmyzsh/ohmyzsh path:plugins/sudo
+ohmyzsh/ohmyzsh path:plugins/extract
+ohmyzsh/ohmyzsh path:plugins/colored-man-pages
+
+# Dev Tools
+ohmyzsh/ohmyzsh path:plugins/git
+ohmyzsh/ohmyzsh path:plugins/docker
+ohmyzsh/ohmyzsh path:plugins/node
+ohmyzsh/ohmyzsh path:plugins/pnpm kind:fpath
+ohmyzsh/ohmyzsh path:plugins/python
+ohmyzsh/ohmyzsh path:plugins/docker-compose
+
+
+# Fuzzy completion and history
+Aloxaf/fzf-tab
+joshskidmore/zsh-fzf-history-search
