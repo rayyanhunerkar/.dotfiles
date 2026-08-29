@@ -104,6 +104,10 @@ else
 fi
 unset _zcompdump
 
+# Active theme's colors for the env-var tools (FZF_DEFAULT_OPTS, BAT_THEME,
+# EZA_COLORS). Written by `set-theme`; must load before fzf reads its options.
+[[ -f "$HOME/.config/zsh/current-theme.zsh" ]] && source "$HOME/.config/zsh/current-theme.zsh"
+
 # fzf: CTRL-T (file finder) / ALT-C (cd finder) / CTRL-R (history, overrides
 # zsh-fzf-history-search's binding above)
 command -v fzf >/dev/null && source <(fzf --zsh)

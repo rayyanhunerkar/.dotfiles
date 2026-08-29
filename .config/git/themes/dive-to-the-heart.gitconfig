@@ -1,0 +1,42 @@
+# dive-to-the-heart — git colors. Copied to ~/.config/git/current-theme.gitconfig
+# by `set-theme`; included from ~/.gitconfig.
+[color]
+	ui = auto
+
+[color "diff"]
+	meta = "#5a6699"
+	frag = "#35d0e0"
+	func = "#4d7cff"
+	old = "#e0566b"
+	new = "#4bd6a8"
+	commit = "#f2c14e"
+	whitespace = "reverse #e0566b"
+
+[color "diff-highlight"]
+	oldNormal = "#e0566b"
+	oldHighlight = "#e0566b reverse"
+	newNormal = "#4bd6a8"
+	newHighlight = "#4bd6a8 reverse"
+
+[color "status"]
+	header = "#5a6699"
+	added = "#4bd6a8"
+	changed = "#f2c14e"
+	untracked = "#e0566b"
+	branch = "#35d0e0 bold"
+	nobranch = "#e0566b"
+	localBranch = "#35d0e0"
+	remoteBranch = "#ff8fb2"
+
+[color "branch"]
+	current = "#35d0e0 bold"
+	local = "#dfe6ff"
+	remote = "#ff8fb2"
+	upstream = "#4d7cff"
+
+[color "decorate"]
+	branch = "#35d0e0 bold"
+	remoteBranch = "#ff8fb2"
+	tag = "#f2c14e"
+	stash = "#4d7cff"
+	HEAD = "#35d0e0"

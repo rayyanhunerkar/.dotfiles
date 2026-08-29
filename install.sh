@@ -10,6 +10,9 @@ stow --dir "$PWD" --target "$HOME/.config" --restow .config
 # package `zsh` links .zshrc / .zsh_plugins.txt into $HOME
 stow --dir "$PWD" --target "$HOME" --restow zsh
 
+# package `git` links .gitconfig / .gitconfig-work into $HOME
+stow --dir "$PWD" --target "$HOME" --restow git
+
 # default font (gitignored; scripts/set-font.sh swaps it)
 CURRENT_FONT="$HOME/.config/kitty/current-font.conf"
 [ -f "$CURRENT_FONT" ] || cp "$PWD/.config/kitty/fonts/jetbrains-mono.conf" "$CURRENT_FONT"
@@ -19,6 +22,9 @@ CURRENT_FONT="$HOME/.config/kitty/current-font.conf"
 [ -f "$HOME/.config/tmux/current-theme.conf" ] || cp "$PWD/.config/tmux/themes/dive-to-the-heart.conf" "$HOME/.config/tmux/current-theme.conf"
 [ -f "$HOME/.config/oh-my-posh/current.omp.json" ] || cp "$PWD/.config/oh-my-posh/themes/dive-to-the-heart.omp.json" "$HOME/.config/oh-my-posh/current.omp.json"
 [ -f "$HOME/.config/fastfetch/config.jsonc" ] || cp "$PWD/.config/fastfetch/themes/dive-to-the-heart.jsonc" "$HOME/.config/fastfetch/config.jsonc"
+mkdir -p "$HOME/.config/git" "$HOME/.config/zsh"
+[ -f "$HOME/.config/git/current-theme.gitconfig" ] || cp "$PWD/.config/git/themes/dive-to-the-heart.gitconfig" "$HOME/.config/git/current-theme.gitconfig"
+[ -f "$HOME/.config/zsh/current-theme.zsh" ] || cp "$PWD/.config/zsh/themes/dive-to-the-heart.zsh" "$HOME/.config/zsh/current-theme.zsh"
 
 # tmux plugin manager (plugins are not vendored)
 TPM="$HOME/.config/tmux/plugins/tpm"

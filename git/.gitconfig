@@ -1,0 +1,76 @@
+# Default identity is personal. Work repos override it via the includeIf at the
+# bottom — order matters, git applies later includes on top of earlier settings.
+[user]
+	name = rayyanhunerkar
+	email = rayyanhunerkar.dev@gmail.com
+
+[core]
+	sshCommand = ssh -i ~/.ssh/rayyanhunerkargit
+	excludesfile = ~/.gitignore
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = true
+
+[push]
+	autoSetupRemote = true
+	followTags = true
+
+[fetch]
+	prune = true
+	pruneTags = true
+
+[rebase]
+	autoStash = true
+	autoSquash = true
+
+[merge]
+	conflictStyle = zdiff3
+
+[diff]
+	algorithm = histogram
+	colorMoved = default
+	mnemonicPrefix = true
+	renames = true
+
+[branch]
+	sort = -committerdate
+
+[log]
+	date = iso
+
+[rerere]
+	enabled = true
+
+[help]
+	autocorrect = prompt
+
+[column]
+	ui = auto
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[alias]
+	s = status --short --branch
+	l = log --oneline --graph --decorate -20
+	ll = log --graph --pretty=format:'%C(auto)%h%d %s %C(dim)%an, %ar'
+	last = show --stat --oneline HEAD
+	unstage = restore --staged
+	amend = commit --amend --no-edit
+	wip = commit --no-verify -m wip
+	# Which identity does this repo actually use?
+	whoami = "!git config user.name && git config user.email"
+
+# Palette-matched diff/status colors. Written by `set-theme`; gitignored.
+[include]
+	path = ~/.config/git/current-theme.gitconfig
+
+# Work repos. Must stay last so it wins over the personal [user] above.
+[includeIf "gitdir:~/Workspace/Morfius/"]
+	path = ~/.gitconfig-work

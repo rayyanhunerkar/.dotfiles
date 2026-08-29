@@ -3,14 +3,14 @@
   "version": 4,
   "final_space": true,
   "palette": {
-    "bg": "#f4f1ea",
-    "fg": "#2a2a33",
-    "blue": "#46586f",
-    "cyan": "#3d7a7a",
-    "gold": "#5a6478",
-    "pink": "#8a5a7a",
-    "red": "#b5474d",
-    "dim": "#8a8272"
+    "bg": "#2b2b33",
+    "fg": "#f0ede4",
+    "blue": "#a8bcd4",
+    "cyan": "#8fb89e",
+    "gold": "#e89aa2",
+    "pink": "#c49ab4",
+    "red": "#f0787e",
+    "dim": "#9a9284"
   },
   "blocks": [
     {

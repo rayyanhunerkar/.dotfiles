@@ -1,0 +1,42 @@
+# organization-xiii — git colors. Copied to ~/.config/git/current-theme.gitconfig
+# by `set-theme`; included from ~/.gitconfig.
+[color]
+	ui = auto
+
+[color "diff"]
+	meta = "#6a6a75"
+	frag = "#7fb0c9"
+	func = "#2e5c8a"
+	old = "#c8102e"
+	new = "#7a9c8a"
+	commit = "#b8bcc4"
+	whitespace = "reverse #c8102e"
+
+[color "diff-highlight"]
+	oldNormal = "#c8102e"
+	oldHighlight = "#c8102e reverse"
+	newNormal = "#7a9c8a"
+	newHighlight = "#7a9c8a reverse"
+
+[color "status"]
+	header = "#6a6a75"
+	added = "#7a9c8a"
+	changed = "#b8bcc4"
+	untracked = "#c8102e"
+	branch = "#7fb0c9 bold"
+	nobranch = "#c8102e"
+	localBranch = "#7fb0c9"
+	remoteBranch = "#6a6a75"
+
+[color "branch"]
+	current = "#7fb0c9 bold"
+	local = "#e8e8ec"
+	remote = "#6a6a75"
+	upstream = "#2e5c8a"
+
+[color "decorate"]
+	branch = "#7fb0c9 bold"
+	remoteBranch = "#6a6a75"
+	tag = "#b8bcc4"
+	stash = "#2e5c8a"
+	HEAD = "#7fb0c9"

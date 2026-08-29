@@ -1,0 +1,42 @@
+# twilight-town — git colors. Copied to ~/.config/git/current-theme.gitconfig
+# by `set-theme`; included from ~/.gitconfig.
+[color]
+	ui = auto
+
+[color "diff"]
+	meta = "#7d6b8f"
+	frag = "#4fd6be"
+	func = "#c98fd8"
+	old = "#ff7a7a"
+	new = "#a8d96b"
+	commit = "#ffc857"
+	whitespace = "reverse #ff7a7a"
+
+[color "diff-highlight"]
+	oldNormal = "#ff7a7a"
+	oldHighlight = "#ff7a7a reverse"
+	newNormal = "#a8d96b"
+	newHighlight = "#a8d96b reverse"
+
+[color "status"]
+	header = "#7d6b8f"
+	added = "#a8d96b"
+	changed = "#ffc857"
+	untracked = "#ff7a7a"
+	branch = "#4fd6be bold"
+	nobranch = "#ff7a7a"
+	localBranch = "#4fd6be"
+	remoteBranch = "#ff9e4f"
+
+[color "branch"]
+	current = "#4fd6be bold"
+	local = "#ffe4c4"
+	remote = "#ff9e4f"
+	upstream = "#c98fd8"
+
+[color "decorate"]
+	branch = "#4fd6be bold"
+	remoteBranch = "#ff9e4f"
+	tag = "#ffc857"
+	stash = "#c98fd8"
+	HEAD = "#4fd6be"

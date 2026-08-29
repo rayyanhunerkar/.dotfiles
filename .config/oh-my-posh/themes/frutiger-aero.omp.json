@@ -1,0 +1,163 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 4,
+  "final_space": true,
+  "palette": {
+    "bg": "#04222e",
+    "fg": "#e6f7ff",
+    "aqua": "#2ee6d6",
+    "sky": "#4db8ff",
+    "lime": "#8ee84f",
+    "sun": "#ffd93d",
+    "coral": "#ff6b6b",
+    "violet": "#9d8df1",
+    "dim": "#5f96aa",
+    "glass": "#0a3242"
+  },
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "path",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "p:bg",
+          "background": "p:aqua",
+          "template": " 󰠓 <b>{{ .Path }}</b> ",
+          "properties": {
+            "style": "folder"
+          }
+        },
+        {
+          "type": "git",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "p:bg",
+          "background": "p:lime",
+          "template": " {{ .HEAD }}{{ if gt .Behind 0 }} ↓{{ .Behind }}{{ end }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }} ",
+          "properties": {
+            "branch_icon": " ",
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          },
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:sun{{ end }}"
+          ]
+        },
+        {
+          "type": "node",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "p:bg",
+          "background": "p:sky",
+          "template": "  {{ .Full }} ",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          }
+        },
+        {
+          "type": "python",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "p:bg",
+          "background": "p:sky",
+          "template": "  {{ .Full }} ",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          }
+        },
+        {
+          "type": "golang",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "p:bg",
+          "background": "p:sky",
+          "template": "  {{ .Full }} ",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          }
+        },
+        {
+          "type": "rust",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "p:bg",
+          "background": "p:sky",
+          "template": "  {{ .Full }} ",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          }
+        },
+        {
+          "type": "root",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "p:bg",
+          "background": "p:coral",
+          "template": "   "
+        },
+        {
+          "type": "executiontime",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "p:bg",
+          "background": "p:violet",
+          "template": "  {{ .FormattedMs }} ",
+          "properties": {
+            "threshold": 2000,
+            "style": "austin"
+          }
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "status",
+          "style": "plain",
+          "foreground": "p:aqua",
+          "properties": {
+            "always_enabled": true
+          },
+          "template": "{{ if .Error }}<p:coral>{{ .Code }} ❯</>{{ else }}<p:aqua>❯</>{{ end }}"
+        }
+      ]
+    },
+    {
+      "type": "rprompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "type": "time",
+          "style": "plain",
+          "foreground": "p:dim",
+          "properties": {
+            "time_format": "15:04"
+          },
+          "template": " {{ .CurrentDate | date .Format }}"
+        }
+      ]
+    }
+  ]
+}

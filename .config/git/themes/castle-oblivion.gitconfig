@@ -1,0 +1,42 @@
+# castle-oblivion — git colors. Copied to ~/.config/git/current-theme.gitconfig
+# by `set-theme`; included from ~/.gitconfig.
+[color]
+	ui = auto
+
+[color "diff"]
+	meta = "#9a9284"
+	frag = "#8fb89e"
+	func = "#a8bcd4"
+	old = "#f0787e"
+	new = "#8fb89e"
+	commit = "#d9b76a"
+	whitespace = "reverse #f0787e"
+
+[color "diff-highlight"]
+	oldNormal = "#f0787e"
+	oldHighlight = "#f0787e reverse"
+	newNormal = "#8fb89e"
+	newHighlight = "#8fb89e reverse"
+
+[color "status"]
+	header = "#9a9284"
+	added = "#8fb89e"
+	changed = "#d9b76a"
+	untracked = "#f0787e"
+	branch = "#8fb89e bold"
+	nobranch = "#f0787e"
+	localBranch = "#8fb89e"
+	remoteBranch = "#c49ab4"
+
+[color "branch"]
+	current = "#8fb89e bold"
+	local = "#f0ede4"
+	remote = "#c49ab4"
+	upstream = "#a8bcd4"
+
+[color "decorate"]
+	branch = "#8fb89e bold"
+	remoteBranch = "#c49ab4"
+	tag = "#d9b76a"
+	stash = "#a8bcd4"
+	HEAD = "#8fb89e"

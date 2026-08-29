@@ -1,0 +1,10 @@
+# Applied only to repos under ~/Workspace/Morfius/ (see includeIf in .gitconfig).
+[user]
+	name = rayyanhunerkar
+	email = rayyan@morfius.ai
+
+[core]
+	sshCommand = ssh -i ~/.ssh/id_ed25519
+
+[github]
+	user = rayyanhunerkar

@@ -1,0 +1,42 @@
+# erdtree — git colors. Copied to ~/.config/git/current-theme.gitconfig
+# by `set-theme`; included from ~/.gitconfig.
+[color]
+	ui = auto
+
+[color "diff"]
+	meta = "#7a6b52"
+	frag = "#5aa8b8"
+	func = "#d4a437"
+	old = "#b83232"
+	new = "#7a8a52"
+	commit = "#e8c56a"
+	whitespace = "reverse #b83232"
+
+[color "diff-highlight"]
+	oldNormal = "#b83232"
+	oldHighlight = "#b83232 reverse"
+	newNormal = "#7a8a52"
+	newHighlight = "#7a8a52 reverse"
+
+[color "status"]
+	header = "#7a6b52"
+	added = "#7a8a52"
+	changed = "#e8c56a"
+	untracked = "#b83232"
+	branch = "#5aa8b8 bold"
+	nobranch = "#b83232"
+	localBranch = "#5aa8b8"
+	remoteBranch = "#8a6a9a"
+
+[color "branch"]
+	current = "#5aa8b8 bold"
+	local = "#e8dcc0"
+	remote = "#8a6a9a"
+	upstream = "#d4a437"
+
+[color "decorate"]
+	branch = "#5aa8b8 bold"
+	remoteBranch = "#8a6a9a"
+	tag = "#e8c56a"
+	stash = "#d4a437"
+	HEAD = "#5aa8b8"

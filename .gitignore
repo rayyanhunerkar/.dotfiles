@@ -21,3 +21,5 @@ zsh/.zsh_plugins.zsh
 .config/oh-my-posh/current.omp.json
 .config/fastfetch/config.jsonc
 zsh/.zshrc.local
+.config/git/current-theme.gitconfig
+.config/zsh/current-theme.zsh

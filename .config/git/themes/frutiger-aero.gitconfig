@@ -1,0 +1,42 @@
+# frutiger-aero — git colors. Copied to ~/.config/git/current-theme.gitconfig
+# by `set-theme`; included from ~/.gitconfig.
+[color]
+	ui = auto
+
+[color "diff"]
+	meta = "#5f96aa"
+	frag = "#2ee6d6"
+	func = "#4db8ff"
+	old = "#ff6b6b"
+	new = "#8ee84f"
+	commit = "#ffd93d"
+	whitespace = "reverse #ff6b6b"
+
+[color "diff-highlight"]
+	oldNormal = "#ff6b6b"
+	oldHighlight = "#ff6b6b reverse"
+	newNormal = "#8ee84f"
+	newHighlight = "#8ee84f reverse"
+
+[color "status"]
+	header = "#5f96aa"
+	added = "#8ee84f"
+	changed = "#ffd93d"
+	untracked = "#ff6b6b"
+	branch = "#2ee6d6 bold"
+	nobranch = "#ff6b6b"
+	localBranch = "#2ee6d6"
+	remoteBranch = "#9d8df1"
+
+[color "branch"]
+	current = "#2ee6d6 bold"
+	local = "#e6f7ff"
+	remote = "#9d8df1"
+	upstream = "#4db8ff"
+
+[color "decorate"]
+	branch = "#2ee6d6 bold"
+	remoteBranch = "#9d8df1"
+	tag = "#ffd93d"
+	stash = "#4db8ff"
+	HEAD = "#2ee6d6"
