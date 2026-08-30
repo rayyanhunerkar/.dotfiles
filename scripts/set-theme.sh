@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Switch the color theme across kitty, tmux, oh-my-posh, fastfetch, git, and the
-# env-var tools (fzf, bat, eza).
+# Switch the color theme across kitty, tmux, oh-my-posh, fastfetch, nvim, git,
+# and the env-var tools (fzf, bat, eza).
 # Usage: set-theme.sh <name>   — run with no args to list what's available.
 set -euo pipefail
 
@@ -34,6 +34,7 @@ copy "$SRC/oh-my-posh/themes/$NAME.omp.json"  "$HOME/.config/oh-my-posh/current.
 copy "$SRC/fastfetch/themes/$NAME.jsonc"      "$HOME/.config/fastfetch/config.jsonc"
 copy "$SRC/git/themes/$NAME.gitconfig"        "$HOME/.config/git/current-theme.gitconfig"
 copy "$SRC/zsh/themes/$NAME.zsh"              "$HOME/.config/zsh/current-theme.zsh"
+copy "$SRC/nvim/themes/$NAME.lua"             "$HOME/.config/nvim/colors/dotfiles.lua"
 echo "theme -> $NAME"
 
 # live-reload kitty (remote control)
@@ -45,6 +46,15 @@ done
 # live-reload tmux
 if command -v tmux >/dev/null && tmux info >/dev/null 2>&1; then
   tmux source-file "$HOME/.config/tmux/tmux.conf" && echo "reloaded tmux"
+fi
+
+# live-reload any running nvim that exposes a server socket
+if command -v nvim >/dev/null; then
+  for sock in "${XDG_RUNTIME_DIR:-/tmp}"/nvim.*/0 /tmp/nvim.*/0 /tmp/nvim*.sock; do
+    [ -S "$sock" ] || continue
+    nvim --server "$sock" --remote-send '<C-\><C-N>:colorscheme dotfiles<CR>' 2>/dev/null \
+      && echo "reloaded nvim ($sock)"
+  done
 fi
 
 echo "zsh: run 'zeload' — the prompt and fzf/bat/eza colors are per-session"

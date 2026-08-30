@@ -25,6 +25,8 @@ CURRENT_FONT="$HOME/.config/kitty/current-font.conf"
 mkdir -p "$HOME/.config/git" "$HOME/.config/zsh"
 [ -f "$HOME/.config/git/current-theme.gitconfig" ] || cp "$PWD/.config/git/themes/dive-to-the-heart.gitconfig" "$HOME/.config/git/current-theme.gitconfig"
 [ -f "$HOME/.config/zsh/current-theme.zsh" ] || cp "$PWD/.config/zsh/themes/dive-to-the-heart.zsh" "$HOME/.config/zsh/current-theme.zsh"
+mkdir -p "$PWD/.config/nvim/colors"
+[ -f "$PWD/.config/nvim/colors/dotfiles.lua" ] || cp "$PWD/.config/nvim/themes/dive-to-the-heart.lua" "$PWD/.config/nvim/colors/dotfiles.lua"
 
 # tmux plugin manager (plugins are not vendored)
 TPM="$HOME/.config/tmux/plugins/tpm"

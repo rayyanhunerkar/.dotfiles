@@ -23,3 +23,11 @@ zsh/.zsh_plugins.zsh
 zsh/.zshrc.local
 .config/git/current-theme.gitconfig
 .config/zsh/current-theme.zsh
+
+# --- nvim: runtime state, not config ---
+.config/nvim/.neoconf.json
+.config/nvim/.luarc.json
+.config/nvim/colors/dotfiles.lua
+
+# --- never track: contains live OAuth tokens ---
+.config/github-copilot/
