@@ -190,7 +190,10 @@ caps, branch, crown, droplet, language icons — is verified present in all of t
 | `ctrl+t` | fuzzy file finder → inserts path |
 | `alt+c` | fuzzy cd into subdirectory |
 | `tab` | fzf-tab: fuzzy completion menu |
-| `zeload` | reload `.zshrc` |
+| `zeload` | reload the shell (`exec zsh`) |
+| `gf*` | forgit — interactive git via fzf: `gfa` add, `gfl` log, `gfd` diff, `gfco` checkout, `gfrb` rebase, `gfsp` stash pop |
+| `k` | kubectl (plus the OMZ kubectl alias set) |
+| `copypath` / `copyfile` | current path / file contents to clipboard |
 | `set-theme <tab>` | switch color theme (completes from `.config/kitty/themes/`) |
 | `set-font <tab>` | switch kitty font (completes from `.config/kitty/fonts/`) |
 
@@ -317,6 +320,14 @@ fresh machine reproduces the same set. Commit it when `:Lazy update` changes it.
 
 ## Notes
 
+- `direnv` is hooked; drop an `.envrc` in a project and `direnv allow` it to get
+  a per-directory environment (auto-activates a uv `.venv`, pins node, scopes
+  work-only vars).
+- forgit's aliases are remapped to a `gf` prefix in `.zshrc` **before** the
+  bundle loads. At defaults it takes `ga`/`glo`/`gd`/`gco`/`grb` from the
+  oh-my-zsh git plugin, and since it loads later it wins silently.
+- `GOPATH/bin` is on PATH — `go install`ed tools (`dlv`, `staticcheck`, `sqlc`,
+  `swag`) were previously installed but unreachable.
 - Plugins clone to `~/.local/share/antidote`, set via `ANTIDOTE_HOME`. Antidote's
   default is `~/Library/Caches/antidote`, which macOS purges under disk pressure —
   that wipes every plugin while the generated `.zsh_plugins.zsh` still points at

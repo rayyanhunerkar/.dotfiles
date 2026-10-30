@@ -10,18 +10,35 @@ zsh-users/zsh-autosuggestions
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-completions
 
+# Safety — a pasted multi-line blob is never auto-executed.
+ohmyzsh/ohmyzsh path:plugins/safe-paste
+
 # Productivity
 # (no rupa/z — zoxide owns `cd`/`z`, two frecency DBs would fight)
 ohmyzsh/ohmyzsh path:plugins/sudo
 ohmyzsh/ohmyzsh path:plugins/extract
 ohmyzsh/ohmyzsh path:plugins/colored-man-pages
+ohmyzsh/ohmyzsh path:plugins/copypath
+ohmyzsh/ohmyzsh path:plugins/copyfile
+
+# Nags when a command you typed already has an alias. There are ~150 git
+# aliases from the plugin below; this is how the unused ones get learned.
+MichaelAquilina/zsh-you-should-use
 
 # Dev tools
 ohmyzsh/ohmyzsh path:plugins/git
 ohmyzsh/ohmyzsh path:plugins/docker kind:fpath
 ohmyzsh/ohmyzsh path:plugins/docker-compose kind:fpath
+ohmyzsh/ohmyzsh path:plugins/golang
+ohmyzsh/ohmyzsh path:plugins/gh
+ohmyzsh/ohmyzsh path:plugins/kubectl
 ohmyzsh/ohmyzsh path:plugins/pnpm kind:fpath
 ohmyzsh/ohmyzsh path:plugins/python
+
+# Interactive git through fzf. Loads AFTER plugins/git on purpose, and its
+# aliases are remapped to a `gf` prefix in .zshrc — left at defaults it would
+# silently steal ga/glo/gd/gco/grb from the git plugin above.
+wfxr/forgit
 
 # Fuzzy completion and history
 Aloxaf/fzf-tab
