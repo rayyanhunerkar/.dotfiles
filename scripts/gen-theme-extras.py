@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Generate the git-color and shell-env (fzf/bat/eza) theme files."""
-import os
+"""Generate the git-color, shell-env (fzf/bat/eza) and prompt palette theme files."""
+import json, os
 D = os.path.expanduser('~/.dotfiles/.config')
 
 # name -> palette + closest bat built-in theme
@@ -29,12 +29,34 @@ T = {
    bg='#04222e', fg='#e6f7ff', dim='#5f96aa', line='#174c60',
    accent='#2ee6d6', alt='#4db8ff', warn='#ffd93d', bad='#ff6b6b',
    good='#8ee84f', extra='#9d8df1', bat='Coldark-Dark'),
+ 'destiny-islands': dict(
+   bg='#0a2b2e', fg='#fbeed6', dim='#6f9c97', line='#205355',
+   accent='#39c5bb', alt='#6ec6ff', warn='#ffc93c', bad='#ff7f6a',
+   good='#7fd46a', extra='#f6a6c1', bat='Solarized (dark)'),
+ 'caelid': dict(
+   bg='#1a0c0a', fg='#f2d9c8', dim='#96695d', line='#4a211b',
+   accent='#f0803c', alt='#e0608a', warn='#f2b45a', bad='#ff4f3f',
+   good='#a8b04a', extra='#a98add', bat='Monokai Extended Origin'),
+ 'hallownest': dict(
+   bg='#0c0e14', fg='#e9edf2', dim='#6d7890', line='#2a3040',
+   accent='#6fa3d8', alt='#8fe3dc', warn='#f08a3c', bad='#d8524f',
+   good='#7fb88a', extra='#a48fd0', bat='OneHalfDark'),
+ 'y2k-vaporwave': dict(
+   bg='#150a2e', fg='#f4ecff', dim='#8d7abc', line='#3b2670',
+   accent='#ff4fd8', alt='#38e8ff', warn='#ffd166', bad='#ff5c7a',
+   good='#5dfdbb', extra='#a77bff', bat='Dracula'),
 }
 
 os.makedirs(f'{D}/git/themes', exist_ok=True)
 os.makedirs(f'{D}/zsh/themes', exist_ok=True)
+os.makedirs(f'{D}/oh-my-posh/palettes', exist_ok=True)
 
 for name, p in T.items():
+    # ------------------------------------------------- oh-my-posh palette ---
+    with open(f'{D}/oh-my-posh/palettes/{name}.json', 'w') as f:
+        json.dump({k: v for k, v in p.items() if k != 'bat'}, f, indent=2)
+        f.write('\n')
+
     # ---------------------------------------------------------- git colors ---
     with open(f'{D}/git/themes/{name}.gitconfig', 'w') as f:
         f.write(f"""# {name} — git colors. Copied to ~/.config/git/current-theme.gitconfig

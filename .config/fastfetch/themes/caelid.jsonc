@@ -1,0 +1,138 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "type": "builtin",
+        "source": "macos",
+        "color": {
+            "1": "#f2b45a", // ember
+            "2": "#a98add", // gravity
+            "3": "#ff4f3f", // scarlet
+            "4": "#e0608a", // rot bloom
+            "5": "#f0803c"  // rust
+        },
+        "padding": {
+            "top": 3,
+            "left": 3
+        }
+    },
+    "display": {
+        "separator": ": ",
+        "color": {
+            "separator": "#96695d"
+        }
+    },
+    "modules": [
+        "break",
+        {
+            "type": "custom",
+            "format": "\u001b[38;2;224;96;138m┌──────────────────────\u001b[38;2;242;180;90mHardware\u001b[38;2;224;96;138m──────────────────────┐"
+        },
+        {
+            "type": "host",
+            "key": " PC",
+            "keyColor": "#e0608a"
+        },
+        {
+            "type": "cpu",
+            "key": "│ ├",
+            "keyColor": "#e0608a"
+        },
+        {
+            "type": "gpu",
+            "key": "│ ├󰍛",
+            "keyColor": "#e0608a"
+        },
+        {
+            "type": "memory",
+            "key": "│ ├󰍛",
+            "keyColor": "#e0608a"
+        },
+        {
+            "type": "disk",
+            "key": "└ └",
+            "keyColor": "#e0608a",
+            "folders": "/"
+        },
+        {
+            "type": "custom",
+            "format": "\u001b[38;2;224;96;138m└────────────────────────────────────────────────────┘"
+        },
+        "break",
+        {
+            "type": "custom",
+            "format": "\u001b[38;2;240;128;60m┌──────────────────────\u001b[38;2;242;180;90mSoftware\u001b[38;2;240;128;60m──────────────────────┐"
+        },
+        {
+            "type": "os",
+            "key": " OS",
+            "keyColor": "#f0803c"
+        },
+        {
+            "type": "kernel",
+            "key": "│ ├",
+            "keyColor": "#f0803c"
+        },
+        {
+            "type": "packages",
+            "key": "│ ├󰏖",
+            "keyColor": "#f0803c"
+        },
+        {
+            "type": "shell",
+            "key": "└ └",
+            "keyColor": "#f0803c"
+        },
+        "break",
+        {
+            "type": "wm",
+            "key": " WM",
+            "keyColor": "#a98add"
+        },
+        {
+            "type": "wmtheme",
+            "key": "│ ├󰉼",
+            "keyColor": "#a98add"
+        },
+        {
+            "type": "terminal",
+            "key": "└ └",
+            "keyColor": "#a98add"
+        },
+        {
+            "type": "custom",
+            "format": "\u001b[38;2;240;128;60m└────────────────────────────────────────────────────┘"
+        },
+        "break",
+        {
+            "type": "custom",
+            "format": "\u001b[38;2;242;180;90m┌──────────────────\u001b[38;2;240;128;60mUptime / Age / DT\u001b[38;2;242;180;90m─────────────────┐"
+        },
+        {
+            "type": "command",
+            "key": " 󰃭 OS Age ",
+            "keyColor": "#f2b45a",
+            "text": "birth=$(stat -f %B / 2>/dev/null || stat -c %W / 2>/dev/null); now=$(date +%s); echo $(( (now - birth) / 86400 )) days"
+        },
+        {
+            "type": "uptime",
+            "key": "  Uptime ",
+            "keyColor": "#f2b45a"
+        },
+        {
+            "type": "datetime",
+            "key": "  DateTime ",
+            "keyColor": "#f2b45a"
+        },
+        {
+            "type": "custom",
+            "format": "\u001b[38;2;242;180;90m└────────────────────────────────────────────────────┘"
+        },
+        "break",
+        {
+            "type": "colors",
+            "paddingLeft": 2,
+            "symbol": "circle"
+        },
+        "break"
+    ]
+}

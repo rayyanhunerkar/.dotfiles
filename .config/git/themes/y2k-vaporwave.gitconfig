@@ -1,0 +1,42 @@
+# y2k-vaporwave — git colors. Copied to ~/.config/git/current-theme.gitconfig
+# by `set-theme`; included from ~/.gitconfig.
+[color]
+	ui = auto
+
+[color "diff"]
+	meta = "#8d7abc"
+	frag = "#ff4fd8"
+	func = "#38e8ff"
+	old = "#ff5c7a"
+	new = "#5dfdbb"
+	commit = "#ffd166"
+	whitespace = "reverse #ff5c7a"
+
+[color "diff-highlight"]
+	oldNormal = "#ff5c7a"
+	oldHighlight = "#ff5c7a reverse"
+	newNormal = "#5dfdbb"
+	newHighlight = "#5dfdbb reverse"
+
+[color "status"]
+	header = "#8d7abc"
+	added = "#5dfdbb"
+	changed = "#ffd166"
+	untracked = "#ff5c7a"
+	branch = "#ff4fd8 bold"
+	nobranch = "#ff5c7a"
+	localBranch = "#ff4fd8"
+	remoteBranch = "#a77bff"
+
+[color "branch"]
+	current = "#ff4fd8 bold"
+	local = "#f4ecff"
+	remote = "#a77bff"
+	upstream = "#38e8ff"
+
+[color "decorate"]
+	branch = "#ff4fd8 bold"
+	remoteBranch = "#a77bff"
+	tag = "#ffd166"
+	stash = "#38e8ff"
+	HEAD = "#ff4fd8"

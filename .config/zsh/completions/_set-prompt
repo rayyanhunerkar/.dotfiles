@@ -1,0 +1,10 @@
+#compdef set-prompt.sh set-prompt
+
+_set-prompt() {
+  local shapes_dir="$HOME/.config/oh-my-posh/shapes"
+  local -a shapes
+  shapes=(default ${${(f)"$(print -l $shapes_dir/*.omp.json(:t:r:r) 2>/dev/null)"}})
+  _describe 'shape' shapes
+}
+
+_set-prompt "$@"

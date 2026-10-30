@@ -1,0 +1,42 @@
+# destiny-islands — git colors. Copied to ~/.config/git/current-theme.gitconfig
+# by `set-theme`; included from ~/.gitconfig.
+[color]
+	ui = auto
+
+[color "diff"]
+	meta = "#6f9c97"
+	frag = "#39c5bb"
+	func = "#6ec6ff"
+	old = "#ff7f6a"
+	new = "#7fd46a"
+	commit = "#ffc93c"
+	whitespace = "reverse #ff7f6a"
+
+[color "diff-highlight"]
+	oldNormal = "#ff7f6a"
+	oldHighlight = "#ff7f6a reverse"
+	newNormal = "#7fd46a"
+	newHighlight = "#7fd46a reverse"
+
+[color "status"]
+	header = "#6f9c97"
+	added = "#7fd46a"
+	changed = "#ffc93c"
+	untracked = "#ff7f6a"
+	branch = "#39c5bb bold"
+	nobranch = "#ff7f6a"
+	localBranch = "#39c5bb"
+	remoteBranch = "#f6a6c1"
+
+[color "branch"]
+	current = "#39c5bb bold"
+	local = "#fbeed6"
+	remote = "#f6a6c1"
+	upstream = "#6ec6ff"
+
+[color "decorate"]
+	branch = "#39c5bb bold"
+	remoteBranch = "#f6a6c1"
+	tag = "#ffc93c"
+	stash = "#6ec6ff"
+	HEAD = "#39c5bb"

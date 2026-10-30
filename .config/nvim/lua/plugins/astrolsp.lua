@@ -32,9 +32,12 @@ return {
 
     -- The astrocommunity typescript pack sets up ts_ls; vtsls supersedes it and
     -- both attaching means duplicate diagnostics and double the CPU per
-    -- keystroke. `false` stops AstroLSP from ever calling setup on it.
+    -- keystroke. `false` stops AstroLSP from ever calling setup on it. tsgo and
+    -- ty are the same story: they overlap vtsls and basedpyright.
     handlers = {
       ts_ls = false,
+      tsgo = false,
+      ty = false,
     },
 
     config = {

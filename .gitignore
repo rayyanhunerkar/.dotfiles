@@ -19,6 +19,8 @@ zsh/.zsh_plugins.zsh
 .config/kitty/current-theme.conf
 .config/tmux/current-theme.conf
 .config/oh-my-posh/current.omp.json
+.config/oh-my-posh/current-theme.name
+.config/oh-my-posh/current-shape.name
 .config/fastfetch/config.jsonc
 zsh/.zshrc.local
 .config/git/current-theme.gitconfig

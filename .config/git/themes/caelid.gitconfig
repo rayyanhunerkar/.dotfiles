@@ -1,0 +1,42 @@
+# caelid — git colors. Copied to ~/.config/git/current-theme.gitconfig
+# by `set-theme`; included from ~/.gitconfig.
+[color]
+	ui = auto
+
+[color "diff"]
+	meta = "#96695d"
+	frag = "#f0803c"
+	func = "#e0608a"
+	old = "#ff4f3f"
+	new = "#a8b04a"
+	commit = "#f2b45a"
+	whitespace = "reverse #ff4f3f"
+
+[color "diff-highlight"]
+	oldNormal = "#ff4f3f"
+	oldHighlight = "#ff4f3f reverse"
+	newNormal = "#a8b04a"
+	newHighlight = "#a8b04a reverse"
+
+[color "status"]
+	header = "#96695d"
+	added = "#a8b04a"
+	changed = "#f2b45a"
+	untracked = "#ff4f3f"
+	branch = "#f0803c bold"
+	nobranch = "#ff4f3f"
+	localBranch = "#f0803c"
+	remoteBranch = "#a98add"
+
+[color "branch"]
+	current = "#f0803c bold"
+	local = "#f2d9c8"
+	remote = "#a98add"
+	upstream = "#e0608a"
+
+[color "decorate"]
+	branch = "#f0803c bold"
+	remoteBranch = "#a98add"
+	tag = "#f2b45a"
+	stash = "#e0608a"
+	HEAD = "#f0803c"

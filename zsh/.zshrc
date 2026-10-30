@@ -238,6 +238,7 @@ alias vi="nvim"
 # Theme/font switchers. Tab-complete via .config/zsh/completions.
 alias set-theme="set-theme.sh"
 alias set-font="set-font.sh"
+alias set-prompt="set-prompt.sh"
 
 command -v bat >/dev/null && alias cat="bat"
 if command -v eza >/dev/null; then

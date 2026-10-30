@@ -1,0 +1,156 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 4,
+  "final_space": true,
+  "palette": {
+    "bg": "#1a0c0a",
+    "fg": "#f2d9c8",
+    "accent": "#f0803c",
+    "alt": "#e0608a",
+    "warn": "#f2b45a",
+    "bad": "#ff4f3f",
+    "good": "#a8b04a",
+    "extra": "#a98add",
+    "dim": "#96695d",
+    "line": "#4a211b"
+  },
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "path",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "p:bg",
+          "background": "p:accent",
+          "properties": {
+            "style": "folder"
+          },
+          "template": " 󰈸 <b>{{ .Path }}</b> "
+        },
+        {
+          "type": "git",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "p:bg",
+          "background": "p:good",
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:warn{{ end }}"
+          ],
+          "properties": {
+            "branch_icon": " ",
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          },
+          "template": " {{ .HEAD }}{{ if gt .Behind 0 }} ↓{{ .Behind }}{{ end }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }} "
+        },
+        {
+          "type": "node",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "p:bg",
+          "background": "p:alt",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          },
+          "template": "  {{ .Full }} "
+        },
+        {
+          "type": "python",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "p:bg",
+          "background": "p:alt",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          },
+          "template": "  {{ .Full }} "
+        },
+        {
+          "type": "golang",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "p:bg",
+          "background": "p:alt",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          },
+          "template": "  {{ .Full }} "
+        },
+        {
+          "type": "rust",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "p:bg",
+          "background": "p:alt",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          },
+          "template": "  {{ .Full }} "
+        },
+        {
+          "type": "root",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "p:bg",
+          "background": "p:bad",
+          "template": "  "
+        },
+        {
+          "type": "executiontime",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "p:bg",
+          "background": "p:extra",
+          "properties": {
+            "threshold": 2000,
+            "style": "austin"
+          },
+          "template": "  {{ .FormattedMs }} "
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "status",
+          "style": "plain",
+          "foreground": "p:accent",
+          "properties": {
+            "always_enabled": true
+          },
+          "template": "{{ if .Error }}<p:bad>{{ .Code }} ❯</>{{ else }}<p:accent>❯</>{{ end }}"
+        }
+      ]
+    },
+    {
+      "type": "rprompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "type": "time",
+          "style": "plain",
+          "foreground": "p:dim",
+          "properties": {
+            "time_format": "15:04"
+          },
+          "template": " {{ .CurrentDate | date .Format }}"
+        }
+      ]
+    }
+  ]
+}

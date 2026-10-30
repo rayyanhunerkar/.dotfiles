@@ -1,0 +1,42 @@
+# hallownest — git colors. Copied to ~/.config/git/current-theme.gitconfig
+# by `set-theme`; included from ~/.gitconfig.
+[color]
+	ui = auto
+
+[color "diff"]
+	meta = "#6d7890"
+	frag = "#6fa3d8"
+	func = "#8fe3dc"
+	old = "#d8524f"
+	new = "#7fb88a"
+	commit = "#f08a3c"
+	whitespace = "reverse #d8524f"
+
+[color "diff-highlight"]
+	oldNormal = "#d8524f"
+	oldHighlight = "#d8524f reverse"
+	newNormal = "#7fb88a"
+	newHighlight = "#7fb88a reverse"
+
+[color "status"]
+	header = "#6d7890"
+	added = "#7fb88a"
+	changed = "#f08a3c"
+	untracked = "#d8524f"
+	branch = "#6fa3d8 bold"
+	nobranch = "#d8524f"
+	localBranch = "#6fa3d8"
+	remoteBranch = "#a48fd0"
+
+[color "branch"]
+	current = "#6fa3d8 bold"
+	local = "#e9edf2"
+	remote = "#a48fd0"
+	upstream = "#8fe3dc"
+
+[color "decorate"]
+	branch = "#6fa3d8 bold"
+	remoteBranch = "#a48fd0"
+	tag = "#f08a3c"
+	stash = "#8fe3dc"
+	HEAD = "#6fa3d8"

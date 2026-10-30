@@ -1,0 +1,12 @@
+{
+  "bg": "#1a0c0a",
+  "fg": "#f2d9c8",
+  "dim": "#96695d",
+  "line": "#4a211b",
+  "accent": "#f0803c",
+  "alt": "#e0608a",
+  "warn": "#f2b45a",
+  "bad": "#ff4f3f",
+  "good": "#a8b04a",
+  "extra": "#a98add"
+}

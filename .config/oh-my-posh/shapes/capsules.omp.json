@@ -1,0 +1,151 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 4,
+  "final_space": true,
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "path",
+          "style": "diamond",
+          "foreground": "p:bg",
+          "template": "  <b>{{ .Path }}</b> ",
+          "background": "p:accent",
+          "properties": {
+            "style": "folder"
+          },
+          "leading_diamond": "",
+          "trailing_diamond": ""
+        },
+        {
+          "type": "git",
+          "style": "diamond",
+          "foreground": "p:bg",
+          "template": " {{ .HEAD }}{{ if gt .Behind 0 }} ↓{{ .Behind }}{{ end }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }} ",
+          "background": "p:good",
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:warn{{ end }}"
+          ],
+          "properties": {
+            "branch_icon": " ",
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          },
+          "leading_diamond": "",
+          "trailing_diamond": ""
+        },
+        {
+          "type": "node",
+          "style": "diamond",
+          "foreground": "p:bg",
+          "template": "  {{ .Full }} ",
+          "background": "p:alt",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          },
+          "leading_diamond": "",
+          "trailing_diamond": ""
+        },
+        {
+          "type": "python",
+          "style": "diamond",
+          "foreground": "p:bg",
+          "template": "  {{ .Full }} ",
+          "background": "p:alt",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          },
+          "leading_diamond": "",
+          "trailing_diamond": ""
+        },
+        {
+          "type": "golang",
+          "style": "diamond",
+          "foreground": "p:bg",
+          "template": "  {{ .Full }} ",
+          "background": "p:alt",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          },
+          "leading_diamond": "",
+          "trailing_diamond": ""
+        },
+        {
+          "type": "rust",
+          "style": "diamond",
+          "foreground": "p:bg",
+          "template": "  {{ .Full }} ",
+          "background": "p:alt",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          },
+          "leading_diamond": "",
+          "trailing_diamond": ""
+        },
+        {
+          "type": "root",
+          "style": "diamond",
+          "foreground": "p:bg",
+          "template": "  ",
+          "background": "p:bad",
+          "leading_diamond": "",
+          "trailing_diamond": ""
+        },
+        {
+          "type": "executiontime",
+          "style": "diamond",
+          "foreground": "p:bg",
+          "template": "  {{ .FormattedMs }} ",
+          "background": "p:extra",
+          "properties": {
+            "threshold": 2000,
+            "style": "austin"
+          },
+          "leading_diamond": "",
+          "trailing_diamond": ""
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "status",
+          "style": "plain",
+          "foreground": "p:accent",
+          "template": "{{ if .Error }}<p:bad>{{ .Code }} ❯</>{{ else }}<p:accent>❯</>{{ end }}",
+          "properties": {
+            "always_enabled": true
+          }
+        }
+      ]
+    },
+    {
+      "type": "rprompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "type": "time",
+          "style": "plain",
+          "foreground": "p:dim",
+          "template": " {{ .CurrentDate | date .Format }}",
+          "properties": {
+            "time_format": "15:04"
+          }
+        }
+      ]
+    }
+  ]
+}

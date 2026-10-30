@@ -30,11 +30,16 @@ copy() {
 
 copy "$SRC/kitty/themes/$NAME.conf"           "$HOME/.config/kitty/current-theme.conf"
 copy "$SRC/tmux/themes/$NAME.conf"            "$HOME/.config/tmux/current-theme.conf"
-copy "$SRC/oh-my-posh/themes/$NAME.omp.json"  "$HOME/.config/oh-my-posh/current.omp.json"
 copy "$SRC/fastfetch/themes/$NAME.jsonc"      "$HOME/.config/fastfetch/config.jsonc"
 copy "$SRC/git/themes/$NAME.gitconfig"        "$HOME/.config/git/current-theme.gitconfig"
 copy "$SRC/zsh/themes/$NAME.zsh"              "$HOME/.config/zsh/current-theme.zsh"
 copy "$SRC/nvim/themes/$NAME.lua"             "$HOME/.config/nvim/colors/dotfiles.lua"
+
+# oh-my-posh goes through set-prompt so a chosen shape survives the switch
+OMP_STATE="$HOME/.config/oh-my-posh"
+mkdir -p "$OMP_STATE"
+echo "$NAME" >"$OMP_STATE/current-theme.name"
+"$DOTFILES/scripts/set-prompt.sh" "$(cat "$OMP_STATE/current-shape.name" 2>/dev/null || echo default)"
 echo "theme -> $NAME"
 
 # live-reload kitty (remote control)
