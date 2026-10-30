@@ -13,6 +13,11 @@ stow --dir "$PWD" --target "$HOME" --restow zsh
 # package `git` links .gitconfig / .gitconfig-work into $HOME
 stow --dir "$PWD" --target "$HOME" --restow git
 
+# package `containers` links containers.conf. Real dir first, or stow folds it
+# into a symlink and podman writes its runtime state into this repo.
+mkdir -p "$HOME/.config/containers"
+stow --dir "$PWD" --target "$HOME" --restow containers
+
 # default font (gitignored; scripts/set-font.sh swaps it)
 CURRENT_FONT="$HOME/.config/kitty/current-font.conf"
 [ -f "$CURRENT_FONT" ] || cp "$PWD/.config/kitty/fonts/jetbrains-mono.conf" "$CURRENT_FONT"

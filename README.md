@@ -12,6 +12,7 @@ with one command.
 | zsh | `zsh/.zshrc`, `zsh/.zsh_plugins.txt` | antidote plugin list; `.zsh_plugins.zsh` bundle is generated, not tracked |
 | git | `git/.gitconfig`, `git/.gitconfig-work` | personal by default; work identity applies under `~/Workspace/Morfius/` |
 | nvim | `.config/nvim/` | AstroNvim v6 template; `lazy-lock.json` is tracked so plugin versions pin |
+| podman | `containers/.config/containers/` | `containers.conf`, stowed into `~` |
 
 ## Themes
 
@@ -19,12 +20,14 @@ with one command.
 set-theme <name>    # tab-completes
 ```
 
-Switches **eight** tools at once — kitty, tmux, oh-my-posh, fastfetch, nvim, git,
+Switches **nine** tools at once — kitty, tmux, oh-my-posh, fastfetch, nvim, git,
 fzf, bat and eza. Each theme's files are copied to a gitignored `current-*` destination
 (seeded from `dive-to-the-heart` by `install.sh`), then kitty and tmux live-reload.
 Run `zeload` after — the prompt and the env-var tools are per-session.
 
-Add a theme — drop a file with the same basename in each themes dir:
+Add a theme — every file shares one basename. Write the handwritten ones, add an
+entry to the theme table in `scripts/gen-theme-extras.py`, then run
+`scripts/gen-theme-extras.py && scripts/gen-nvim-themes.py`:
 
 | Dir | File | Note |
 |---|---|---|
@@ -32,8 +35,9 @@ Add a theme — drop a file with the same basename in each themes dir:
 | `.config/tmux/themes/` | `<name>.conf` | full status bar (powerline segments) + pane/message/mode styles |
 | `.config/oh-my-posh/themes/` | `<name>.omp.json` | full prompt shape, not just colors — see below |
 | `.config/fastfetch/themes/` | `<name>.jsonc` | `keyColor` hex + logo `color` slots 1-5 |
-| `.config/git/themes/` | `<name>.gitconfig` | diff/status/branch colors — **quote hex values**, `#` starts a comment in gitconfig |
-| `.config/zsh/themes/` | `<name>.zsh` | `FZF_DEFAULT_OPTS`, `BAT_THEME`, `EZA_COLORS` |
+| `.config/oh-my-posh/palettes/` | `<name>.json` | **generated** by `gen-theme-extras.py` |
+| `.config/git/themes/` | `<name>.gitconfig` | **generated** by `gen-theme-extras.py` — diff/status/branch colors |
+| `.config/zsh/themes/` | `<name>.zsh` | **generated** by `gen-theme-extras.py` — `FZF_DEFAULT_OPTS`, `BAT_THEME`, `EZA_COLORS` |
 | `.config/nvim/themes/` | `<name>.lua` | **generated** from the kitty theme — see below |
 
 `set-theme` completes from `.config/kitty/themes/`, so a new theme shows up in tab
@@ -177,13 +181,14 @@ the `.config` package folds into `~/.config`.
 
 ```sh
 git clone <repo> ~/.dotfiles
-~/.dotfiles/install.sh          # stow --restow .config  +  clone tpm
+~/.dotfiles/install.sh          # stow every package, seed current-* files, clone tpm
 ```
 
 Or by hand:
 
 ```sh
-cd ~/.dotfiles && stow -t ~/.config .config && stow -t ~ zsh
+mkdir -p ~/.config/containers   # keeps podman's runtime state out of the repo
+cd ~/.dotfiles && stow -t ~/.config .config && stow -t ~ zsh git containers
 ```
 
 Then open tmux and press `<prefix> + I` (prefix is `C-s`) to install plugins.
@@ -276,21 +281,18 @@ git whoami
 
 ## nvim
 
-Stock [AstroNvim](https://github.com/AstroNvim/AstroNvim) v6 via the official
-template — every customization file is still the template's
-`if true then return {} end` stub, so nothing in `lua/` is active yet and the
-colorscheme is AstroNvim's default `astrodark`.
-
-To start customizing, delete that first line from the relevant file:
+[AstroNvim](https://github.com/AstroNvim/AstroNvim) v6 via the official template.
+`astrocore.lua`, `user.lua` and `polish.lua` are still the template's
+`if true then return {} end` stub — delete that first line to activate one.
 
 | File | Controls |
 |---|---|
 | `lua/plugins/astroui.lua` | colorscheme, highlight overrides, icons |
-| `lua/plugins/astrocore.lua` | options, keymaps, autocmds |
+| `lua/plugins/astrocore.lua` | options, keymaps, autocmds (stub) |
 | `lua/plugins/astrolsp.lua` | LSP servers and behaviour |
-| `lua/plugins/user.lua` | your own plugin specs |
+| `lua/plugins/user.lua` | your own plugin specs (stub) |
 | `lua/community.lua` | astrocommunity language packs |
-| `lua/polish.lua` | last-run vimscript/lua |
+| `lua/polish.lua` | last-run vimscript/lua (stub) |
 
 ### Colorscheme
 
