@@ -1,0 +1,17 @@
+// hallownest — zellij colors. Copied to ~/.config/zellij/themes/dotfiles.kdl
+// by `set-theme`. Always named `dotfiles`, the name config.kdl selects.
+themes {
+    dotfiles {
+        fg "#e9edf2"
+        bg "#2a3040"
+        black "#0c0e14"
+        red "#d8524f"
+        green "#7fb88a"
+        yellow "#f08a3c"
+        blue "#8fe3dc"
+        magenta "#a48fd0"
+        cyan "#6fa3d8"
+        white "#e9edf2"
+        orange "#f08a3c"
+    }
+}

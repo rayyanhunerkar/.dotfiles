@@ -1,0 +1,17 @@
+// twilight-town — zellij colors. Copied to ~/.config/zellij/themes/dotfiles.kdl
+// by `set-theme`. Always named `dotfiles`, the name config.kdl selects.
+themes {
+    dotfiles {
+        fg "#ffe4c4"
+        bg "#3a2c47"
+        black "#1a1220"
+        red "#ff7a7a"
+        green "#a8d96b"
+        yellow "#ffc857"
+        blue "#c98fd8"
+        magenta "#ff9e4f"
+        cyan "#4fd6be"
+        white "#ffe4c4"
+        orange "#ffc857"
+    }
+}

@@ -17,6 +17,8 @@
 zsh/.zsh_plugins.zsh
 .config/kitty/current-font.conf
 .config/kitty/current-theme.conf
+.config/ghostty/current-font
+.config/ghostty/current-theme
 .config/tmux/current-theme.conf
 .config/oh-my-posh/current.omp.json
 .config/oh-my-posh/current-theme.name
@@ -25,6 +27,7 @@ zsh/.zsh_plugins.zsh
 zsh/.zshrc.local
 .config/git/current-theme.gitconfig
 .config/zsh/current-theme.zsh
+.config/zellij/themes/
 
 # --- nvim: runtime state, not config ---
 .config/nvim/.neoconf.json

@@ -1,0 +1,17 @@
+// organization-xiii — zellij colors. Copied to ~/.config/zellij/themes/dotfiles.kdl
+// by `set-theme`. Always named `dotfiles`, the name config.kdl selects.
+themes {
+    dotfiles {
+        fg "#e8e8ec"
+        bg "#2a2a30"
+        black "#0b0b0d"
+        red "#c8102e"
+        green "#7a9c8a"
+        yellow "#b8bcc4"
+        blue "#2e5c8a"
+        magenta "#6a6a75"
+        cyan "#7fb0c9"
+        white "#e8e8ec"
+        orange "#b8bcc4"
+    }
+}

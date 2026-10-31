@@ -21,9 +21,11 @@ stow --dir "$PWD" --target "$HOME" --restow containers
 # default font (gitignored; scripts/set-font.sh swaps it)
 CURRENT_FONT="$HOME/.config/kitty/current-font.conf"
 [ -f "$CURRENT_FONT" ] || cp "$PWD/.config/kitty/fonts/jetbrains-mono.conf" "$CURRENT_FONT"
+[ -f "$HOME/.config/ghostty/current-font" ] || cp "$PWD/.config/ghostty/fonts/jetbrains-mono" "$HOME/.config/ghostty/current-font"
 
 # default theme (gitignored; scripts/set-theme.sh swaps it)
 [ -f "$HOME/.config/kitty/current-theme.conf" ] || cp "$PWD/.config/kitty/themes/dive-to-the-heart.conf" "$HOME/.config/kitty/current-theme.conf"
+[ -f "$HOME/.config/ghostty/current-theme" ] || cp "$PWD/.config/ghostty/themes/dive-to-the-heart" "$HOME/.config/ghostty/current-theme"
 [ -f "$HOME/.config/tmux/current-theme.conf" ] || cp "$PWD/.config/tmux/themes/dive-to-the-heart.conf" "$HOME/.config/tmux/current-theme.conf"
 [ -f "$HOME/.config/oh-my-posh/current.omp.json" ] || cp "$PWD/.config/oh-my-posh/themes/dive-to-the-heart.omp.json" "$HOME/.config/oh-my-posh/current.omp.json"
 [ -f "$HOME/.config/oh-my-posh/current-theme.name" ] || echo dive-to-the-heart >"$HOME/.config/oh-my-posh/current-theme.name"
@@ -31,6 +33,8 @@ CURRENT_FONT="$HOME/.config/kitty/current-font.conf"
 mkdir -p "$HOME/.config/git" "$HOME/.config/zsh"
 [ -f "$HOME/.config/git/current-theme.gitconfig" ] || cp "$PWD/.config/git/themes/dive-to-the-heart.gitconfig" "$HOME/.config/git/current-theme.gitconfig"
 [ -f "$HOME/.config/zsh/current-theme.zsh" ] || cp "$PWD/.config/zsh/themes/dive-to-the-heart.zsh" "$HOME/.config/zsh/current-theme.zsh"
+mkdir -p "$PWD/.config/zellij/themes"
+[ -f "$PWD/.config/zellij/themes/dotfiles.kdl" ] || cp "$PWD/.config/zellij/palettes/dive-to-the-heart.kdl" "$PWD/.config/zellij/themes/dotfiles.kdl"
 mkdir -p "$PWD/.config/nvim/colors"
 [ -f "$PWD/.config/nvim/colors/dotfiles.lua" ] || cp "$PWD/.config/nvim/themes/dive-to-the-heart.lua" "$PWD/.config/nvim/colors/dotfiles.lua"
 

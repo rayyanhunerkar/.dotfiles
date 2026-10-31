@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Switch the color theme across kitty, tmux, oh-my-posh, fastfetch, nvim, git,
-# and the env-var tools (fzf, bat, eza).
+# Switch the color theme across kitty, ghostty, tmux, zellij, oh-my-posh, fastfetch,
+# nvim, git, and the env-var tools (fzf, bat, eza).
 # Usage: set-theme.sh <name>   — run with no args to list what's available.
 set -euo pipefail
 
@@ -29,11 +29,13 @@ copy() {
 }
 
 copy "$SRC/kitty/themes/$NAME.conf"           "$HOME/.config/kitty/current-theme.conf"
+copy "$SRC/ghostty/themes/$NAME"              "$HOME/.config/ghostty/current-theme"
 copy "$SRC/tmux/themes/$NAME.conf"            "$HOME/.config/tmux/current-theme.conf"
 copy "$SRC/fastfetch/themes/$NAME.jsonc"      "$HOME/.config/fastfetch/config.jsonc"
 copy "$SRC/git/themes/$NAME.gitconfig"        "$HOME/.config/git/current-theme.gitconfig"
 copy "$SRC/zsh/themes/$NAME.zsh"              "$HOME/.config/zsh/current-theme.zsh"
 copy "$SRC/nvim/themes/$NAME.lua"             "$HOME/.config/nvim/colors/dotfiles.lua"
+copy "$SRC/zellij/palettes/$NAME.kdl"         "$HOME/.config/zellij/themes/dotfiles.kdl"
 
 # oh-my-posh goes through set-prompt so a chosen shape survives the switch
 OMP_STATE="$HOME/.config/oh-my-posh"
@@ -63,3 +65,6 @@ if command -v nvim >/dev/null; then
 fi
 
 echo "zsh: run 'zeload' — the prompt and fzf/bat/eza colors are per-session"
+if pgrep -qx ghostty; then
+  echo "ghostty: press cmd+shift+, to reload — no remote reload on macOS"
+fi

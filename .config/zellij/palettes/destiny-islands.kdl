@@ -1,0 +1,17 @@
+// destiny-islands — zellij colors. Copied to ~/.config/zellij/themes/dotfiles.kdl
+// by `set-theme`. Always named `dotfiles`, the name config.kdl selects.
+themes {
+    dotfiles {
+        fg "#fbeed6"
+        bg "#205355"
+        black "#0a2b2e"
+        red "#ff7f6a"
+        green "#7fd46a"
+        yellow "#ffc93c"
+        blue "#6ec6ff"
+        magenta "#f6a6c1"
+        cyan "#39c5bb"
+        white "#fbeed6"
+        orange "#ffc93c"
+    }
+}

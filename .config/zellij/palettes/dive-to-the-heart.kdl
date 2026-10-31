@@ -1,0 +1,17 @@
+// dive-to-the-heart — zellij colors. Copied to ~/.config/zellij/themes/dotfiles.kdl
+// by `set-theme`. Always named `dotfiles`, the name config.kdl selects.
+themes {
+    dotfiles {
+        fg "#dfe6ff"
+        bg "#2a3155"
+        black "#0a0e27"
+        red "#e0566b"
+        green "#4bd6a8"
+        yellow "#f2c14e"
+        blue "#4d7cff"
+        magenta "#ff8fb2"
+        cyan "#35d0e0"
+        white "#dfe6ff"
+        orange "#f2c14e"
+    }
+}

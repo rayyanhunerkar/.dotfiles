@@ -1,0 +1,17 @@
+// erdtree — zellij colors. Copied to ~/.config/zellij/themes/dotfiles.kdl
+// by `set-theme`. Always named `dotfiles`, the name config.kdl selects.
+themes {
+    dotfiles {
+        fg "#e8dcc0"
+        bg "#3a3227"
+        black "#14100c"
+        red "#b83232"
+        green "#7a8a52"
+        yellow "#e8c56a"
+        blue "#d4a437"
+        magenta "#8a6a9a"
+        cyan "#5aa8b8"
+        white "#e8dcc0"
+        orange "#e8c56a"
+    }
+}

@@ -1,0 +1,17 @@
+// castle-oblivion — zellij colors. Copied to ~/.config/zellij/themes/dotfiles.kdl
+// by `set-theme`. Always named `dotfiles`, the name config.kdl selects.
+themes {
+    dotfiles {
+        fg "#f0ede4"
+        bg "#4a4a56"
+        black "#2b2b33"
+        red "#f0787e"
+        green "#8fb89e"
+        yellow "#d9b76a"
+        blue "#a8bcd4"
+        magenta "#c49ab4"
+        cyan "#8fb89e"
+        white "#f0ede4"
+        orange "#d9b76a"
+    }
+}

@@ -1,0 +1,17 @@
+// frutiger-aero — zellij colors. Copied to ~/.config/zellij/themes/dotfiles.kdl
+// by `set-theme`. Always named `dotfiles`, the name config.kdl selects.
+themes {
+    dotfiles {
+        fg "#e6f7ff"
+        bg "#174c60"
+        black "#04222e"
+        red "#ff6b6b"
+        green "#8ee84f"
+        yellow "#ffd93d"
+        blue "#4db8ff"
+        magenta "#9d8df1"
+        cyan "#2ee6d6"
+        white "#e6f7ff"
+        orange "#ffd93d"
+    }
+}

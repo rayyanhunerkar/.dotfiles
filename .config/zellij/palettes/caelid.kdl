@@ -1,0 +1,17 @@
+// caelid — zellij colors. Copied to ~/.config/zellij/themes/dotfiles.kdl
+// by `set-theme`. Always named `dotfiles`, the name config.kdl selects.
+themes {
+    dotfiles {
+        fg "#f2d9c8"
+        bg "#4a211b"
+        black "#1a0c0a"
+        red "#ff4f3f"
+        green "#a8b04a"
+        yellow "#f2b45a"
+        blue "#e0608a"
+        magenta "#a98add"
+        cyan "#f0803c"
+        white "#f2d9c8"
+        orange "#f2b45a"
+    }
+}

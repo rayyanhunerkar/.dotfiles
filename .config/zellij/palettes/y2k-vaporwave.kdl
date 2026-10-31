@@ -1,0 +1,17 @@
+// y2k-vaporwave — zellij colors. Copied to ~/.config/zellij/themes/dotfiles.kdl
+// by `set-theme`. Always named `dotfiles`, the name config.kdl selects.
+themes {
+    dotfiles {
+        fg "#f4ecff"
+        bg "#3b2670"
+        black "#150a2e"
+        red "#ff5c7a"
+        green "#5dfdbb"
+        yellow "#ffd166"
+        blue "#38e8ff"
+        magenta "#a77bff"
+        cyan "#ff4fd8"
+        white "#f4ecff"
+        orange "#ffd166"
+    }
+}
