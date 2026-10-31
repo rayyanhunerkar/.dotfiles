@@ -1,12 +1,11 @@
 # dotfiles
 
-Themed terminal stack — switchable across kitty, ghostty, tmux, oh-my-posh and
-fastfetch with one command.
+Themed terminal stack — switchable across kitty, tmux, oh-my-posh and fastfetch
+with one command.
 
 | Tool | Path | Notes |
 |------|------|-------|
 | kitty | `.config/kitty/` | `kitty.conf` includes `current-theme.conf` + `current-font.conf` |
-| ghostty | `.config/ghostty/` | mirrors `kitty.conf`; `config.ghostty` loads `current-theme` + `current-font` |
 | tmux | `.config/tmux/` | tpm; `tmux.conf` sources `current-theme.conf`, which owns the whole status bar. Plugins are **not** vendored |
 | zellij | `.config/zellij/` | what kitty launches; `config.kdl` mirrors tmux's prefix bindings. tmux config stays, one `shell` line in `kitty.conf` swaps back |
 | oh-my-posh | `.config/oh-my-posh/` | `current.omp.json` wired in `zsh/.zshrc` |
@@ -22,15 +21,14 @@ fastfetch with one command.
 set-theme <name>    # tab-completes
 ```
 
-Switches **eleven** tools at once — kitty, ghostty, tmux, zellij, oh-my-posh, fastfetch,
-nvim, git, fzf, bat and eza. Each theme's files are copied to a gitignored `current-*`
+Switches **ten** tools at once — kitty, tmux, zellij, oh-my-posh, fastfetch, nvim,
+git, fzf, bat and eza. Each theme's files are copied to a gitignored `current-*`
 destination (seeded from `dive-to-the-heart` by `install.sh`), then kitty and tmux
 live-reload. Run `zeload` after — the prompt and the env-var tools are per-session.
-Ghostty has no remote reload on macOS, so press `cmd+shift+,` there.
 
 Add a theme — every file shares one basename. Write the handwritten ones, add an
 entry to the theme table in `scripts/gen-theme-extras.py`, then run
-`scripts/gen-theme-extras.py && scripts/gen-nvim-themes.py && scripts/gen-ghostty-themes.py`:
+`scripts/gen-theme-extras.py && scripts/gen-nvim-themes.py`:
 
 | Dir | File | Note |
 |---|---|---|
@@ -43,7 +41,6 @@ entry to the theme table in `scripts/gen-theme-extras.py`, then run
 | `.config/git/themes/` | `<name>.gitconfig` | **generated** by `gen-theme-extras.py` — diff/status/branch colors |
 | `.config/zsh/themes/` | `<name>.zsh` | **generated** by `gen-theme-extras.py` — `FZF_DEFAULT_OPTS`, `BAT_THEME`, `EZA_COLORS` |
 | `.config/nvim/themes/` | `<name>.lua` | **generated** from the kitty theme — see below |
-| `.config/ghostty/themes/` | `<name>` | **generated** from the kitty theme by `gen-ghostty-themes.py` |
 
 `set-theme` completes from `.config/kitty/themes/`, so a new theme shows up in tab
 completion as soon as its kitty file exists.
@@ -206,9 +203,8 @@ eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/current.omp.json)"
 
 ## Fonts
 
-kitty and ghostty fonts are swappable — `.config/kitty/current-font.conf` and
-`.config/ghostty/current-font` are gitignored (machine-local), included by each tool's
-config, seeded from `jetbrains-mono` by `install.sh`.
+kitty's font is swappable — `.config/kitty/current-font.conf` is gitignored
+(machine-local), included by `kitty.conf`, seeded from `jetbrains-mono` by `install.sh`.
 
 ```sh
 set-font <name>    # tab-completes
@@ -222,10 +218,9 @@ set-font <name>    # tab-completes
 | `recursive-casual` | humanist and rounded; pairs with `frutiger-aero` |
 | `recursive-linear` | same family, straighter — a quieter everyday face |
 
-Live-reloads any running kitty windows (remote control is on, local socket only);
-ghostty picks it up on `cmd+shift+,`.
+Live-reloads any running kitty windows (remote control is on, local socket only).
 Add a font: drop a `<name>.conf` (font_family/bold_font/italic_font/bold_italic_font)
-in `.config/kitty/fonts/`, then run `scripts/gen-ghostty-themes.py`. Every glyph the themes use — powerline arrows, rounded
+in `.config/kitty/fonts/`. Every glyph the themes use — powerline arrows, rounded
 caps, branch, crown, droplet, language icons — is verified present in all of these.
 
 ## Cheatsheet

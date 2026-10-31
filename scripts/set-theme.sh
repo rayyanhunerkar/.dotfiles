@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Switch the color theme across kitty, ghostty, tmux, zellij, oh-my-posh, fastfetch,
-# nvim, git, and the env-var tools (fzf, bat, eza).
+# Switch the color theme across kitty, tmux, zellij, oh-my-posh, fastfetch, nvim,
+# git, and the env-var tools (fzf, bat, eza).
 # Usage: set-theme.sh <name>   — run with no args to list what's available.
 set -euo pipefail
 
@@ -29,7 +29,6 @@ copy() {
 }
 
 copy "$SRC/kitty/themes/$NAME.conf"           "$HOME/.config/kitty/current-theme.conf"
-copy "$SRC/ghostty/themes/$NAME"              "$HOME/.config/ghostty/current-theme"
 copy "$SRC/tmux/themes/$NAME.conf"            "$HOME/.config/tmux/current-theme.conf"
 copy "$SRC/fastfetch/themes/$NAME.jsonc"      "$HOME/.config/fastfetch/config.jsonc"
 copy "$SRC/git/themes/$NAME.gitconfig"        "$HOME/.config/git/current-theme.gitconfig"
@@ -57,7 +56,8 @@ fi
 
 # live-reload any running nvim that exposes a server socket
 if command -v nvim >/dev/null; then
-  for sock in "${XDG_RUNTIME_DIR:-/tmp}"/nvim.*/0 /tmp/nvim.*/0 /tmp/nvim*.sock; do
+  # macOS default: $TMPDIR/nvim.<user>/<id>/nvim.<pid>.0
+  for sock in "${TMPDIR:-/tmp}"/nvim.*/*/nvim.*.0 /tmp/nvim*.sock; do
     [ -S "$sock" ] || continue
     nvim --server "$sock" --remote-send '<C-\><C-N>:colorscheme dotfiles<CR>' 2>/dev/null \
       && echo "reloaded nvim ($sock)"
@@ -65,6 +65,3 @@ if command -v nvim >/dev/null; then
 fi
 
 echo "zsh: run 'zeload' — the prompt and fzf/bat/eza colors are per-session"
-if pgrep -qx ghostty; then
-  echo "ghostty: press cmd+shift+, to reload — no remote reload on macOS"
-fi

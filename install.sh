@@ -21,11 +21,9 @@ stow --dir "$PWD" --target "$HOME" --restow containers
 # default font (gitignored; scripts/set-font.sh swaps it)
 CURRENT_FONT="$HOME/.config/kitty/current-font.conf"
 [ -f "$CURRENT_FONT" ] || cp "$PWD/.config/kitty/fonts/jetbrains-mono.conf" "$CURRENT_FONT"
-[ -f "$HOME/.config/ghostty/current-font" ] || cp "$PWD/.config/ghostty/fonts/jetbrains-mono" "$HOME/.config/ghostty/current-font"
 
 # default theme (gitignored; scripts/set-theme.sh swaps it)
 [ -f "$HOME/.config/kitty/current-theme.conf" ] || cp "$PWD/.config/kitty/themes/dive-to-the-heart.conf" "$HOME/.config/kitty/current-theme.conf"
-[ -f "$HOME/.config/ghostty/current-theme" ] || cp "$PWD/.config/ghostty/themes/dive-to-the-heart" "$HOME/.config/ghostty/current-theme"
 [ -f "$HOME/.config/tmux/current-theme.conf" ] || cp "$PWD/.config/tmux/themes/dive-to-the-heart.conf" "$HOME/.config/tmux/current-theme.conf"
 [ -f "$HOME/.config/oh-my-posh/current.omp.json" ] || cp "$PWD/.config/oh-my-posh/themes/dive-to-the-heart.omp.json" "$HOME/.config/oh-my-posh/current.omp.json"
 [ -f "$HOME/.config/oh-my-posh/current-theme.name" ] || echo dive-to-the-heart >"$HOME/.config/oh-my-posh/current-theme.name"

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Switch the kitty and ghostty font. Usage: set-font.sh <jetbrains-mono|victor-mono|maple-mono>
+# Switch the kitty font. Usage: set-font.sh <jetbrains-mono|victor-mono|maple-mono>
 set -euo pipefail
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -15,7 +15,6 @@ fi
 
 cp "$FONTS_DIR/$1.conf" "$CURRENT"
 echo "current-font.conf -> $1"
-cp "$DOTFILES/.config/ghostty/fonts/$1" "$HOME/.config/ghostty/current-font"
 
 # live-reload any running kitty instances with remote control on
 for sock in /tmp/kitty-*; do

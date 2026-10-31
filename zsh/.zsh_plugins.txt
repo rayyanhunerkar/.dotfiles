@@ -27,7 +27,8 @@ MichaelAquilina/zsh-you-should-use
 
 # Dev tools
 ohmyzsh/ohmyzsh path:plugins/git
-ohmyzsh/ohmyzsh path:plugins/docker kind:fpath
+# No plugins/docker: podman's completion is generated into .config/zsh/completions.
+# docker-compose stays, it is the provider behind `podman compose`.
 ohmyzsh/ohmyzsh path:plugins/docker-compose kind:fpath
 ohmyzsh/ohmyzsh path:plugins/golang
 ohmyzsh/ohmyzsh path:plugins/gh

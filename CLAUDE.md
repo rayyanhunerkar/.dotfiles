@@ -26,17 +26,15 @@ Generated files are tracked, so change the source and regenerate:
 | Output | Source | Regenerate |
 |---|---|---|
 | `.config/nvim/themes/*.lua` | `.config/kitty/themes/*.conf` | `scripts/gen-nvim-themes.py` |
-| `.config/ghostty/themes/*`, `.config/ghostty/fonts/*` | `.config/kitty/themes/*.conf`, `.config/kitty/fonts/*.conf` | `scripts/gen-ghostty-themes.py` |
 | `.config/oh-my-posh/palettes/*.json`, `.config/git/themes/*`, `.config/zsh/themes/*`, `.config/zellij/palettes/*.kdl` | theme table `T` in `scripts/gen-theme-extras.py` | `scripts/gen-theme-extras.py` |
 | `.config/oh-my-posh/shapes/*.omp.json` | `scripts/gen-omp-shapes.py` | same script |
 
 Handwritten per theme: kitty, tmux, oh-my-posh `themes/*.omp.json`, fastfetch.
 
-So a new theme takes the four handwritten files, an entry in `T`, then all three theme generators. Shapes colour only through palette roles (`p:accent`, `p:warn`, ...) so every shape works with every theme; `set-prompt.sh` merges shape and palette with `jq`.
+So a new theme takes the four handwritten files, an entry in `T`, then both theme generators. Shapes colour only through palette roles (`p:accent`, `p:warn`, ...) so every shape works with every theme; `set-prompt.sh` merges shape and palette with `jq`.
 
 - Generators hardcode `~/.dotfiles`, so they write to the main checkout even when run from a git worktree.
 - `set-theme.sh`, `set-prompt.sh` and `set-font.sh` change the user's live kitty, tmux and nvim sessions. Run them only when asked; prove a change with the generators and `git diff` instead.
-- Never signal ghostty to reload: `SIGUSR2` is GTK-only, so macOS has no remote reload and `set-theme.sh` only prints a `cmd+shift+,` reminder.
 - `set-theme` and friends are interactive aliases; scripts call the `.sh` names, which `.zshrc` puts on PATH.
 
 ## Shell

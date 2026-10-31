@@ -113,10 +113,21 @@ _lazy_load _load_nvm '
   [ -s /opt/homebrew/opt/nvm/etc/bash_completion.d/nvm ] && . /opt/homebrew/opt/nvm/etc/bash_completion.d/nvm
 ' nvm
 
+# sdkman: same reasoning as nvm. Installed tools go straight on PATH so nvim and
+# LSP servers see them; only `sdk` itself is lazy.
 export SDKMAN_DIR="$HOME/.sdkman"
+() {
+  local bin
+  for bin in "$SDKMAN_DIR"/candidates/*/current/bin(N); do
+    path=("$bin" $path)
+  done
+  [[ -d $SDKMAN_DIR/candidates/java/current ]] &&
+    export JAVA_HOME="$SDKMAN_DIR/candidates/java/current"
+}
+
 _lazy_load _load_sdkman '
   [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-' sdk java javac gradle mvn kotlin scala
+' sdk
 
 # ════════════════════════════════════════════════ OPTIONS & HISTORY ═══
 
@@ -262,8 +273,3 @@ command -v oh-my-posh >/dev/null &&
 # Untracked: infra hostnames, work aliases, anything machine-specific.
 
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/rayyanhunerkar/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
