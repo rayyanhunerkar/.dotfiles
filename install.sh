@@ -1,8 +1,17 @@
 #!/usr/bin/env bash
-# Stow configs into ~/.config and bootstrap tmux plugins.
+# Install packages, stow configs into ~/.config, install mise toolchains, and
+# bootstrap the zsh and tmux plugin managers. macOS settings are separate:
+# scripts/defaults.sh.
 set -euo pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")"
+
+# Homebrew packages. Installs what's missing; never removes anything.
+if ! command -v brew >/dev/null; then
+  echo "install Homebrew first: https://brew.sh" >&2
+  exit 1
+fi
+brew bundle --file "$PWD/Brewfile"
 
 # package `.config` folds into ~/.config (kitty, tmux, oh-my-posh, fastfetch, ...)
 stow --dir "$PWD" --target "$HOME/.config" --restow .config
@@ -18,23 +27,21 @@ stow --dir "$PWD" --target "$HOME" --restow git
 mkdir -p "$HOME/.config/containers"
 stow --dir "$PWD" --target "$HOME" --restow containers
 
+# runtimes and dev CLIs from .config/mise/config.toml (now stowed into place)
+mise install
+
 # default font (gitignored; scripts/set-font.sh swaps it)
 CURRENT_FONT="$HOME/.config/kitty/current-font.conf"
 [ -f "$CURRENT_FONT" ] || cp "$PWD/.config/kitty/fonts/jetbrains-mono.conf" "$CURRENT_FONT"
 
 # default theme (gitignored; scripts/set-theme.sh swaps it)
-[ -f "$HOME/.config/kitty/current-theme.conf" ] || cp "$PWD/.config/kitty/themes/dive-to-the-heart.conf" "$HOME/.config/kitty/current-theme.conf"
-[ -f "$HOME/.config/tmux/current-theme.conf" ] || cp "$PWD/.config/tmux/themes/dive-to-the-heart.conf" "$HOME/.config/tmux/current-theme.conf"
-[ -f "$HOME/.config/oh-my-posh/current.omp.json" ] || cp "$PWD/.config/oh-my-posh/themes/dive-to-the-heart.omp.json" "$HOME/.config/oh-my-posh/current.omp.json"
-[ -f "$HOME/.config/oh-my-posh/current-theme.name" ] || echo dive-to-the-heart >"$HOME/.config/oh-my-posh/current-theme.name"
-[ -f "$HOME/.config/fastfetch/config.jsonc" ] || cp "$PWD/.config/fastfetch/themes/dive-to-the-heart.jsonc" "$HOME/.config/fastfetch/config.jsonc"
-mkdir -p "$HOME/.config/git" "$HOME/.config/zsh"
-[ -f "$HOME/.config/git/current-theme.gitconfig" ] || cp "$PWD/.config/git/themes/dive-to-the-heart.gitconfig" "$HOME/.config/git/current-theme.gitconfig"
-[ -f "$HOME/.config/zsh/current-theme.zsh" ] || cp "$PWD/.config/zsh/themes/dive-to-the-heart.zsh" "$HOME/.config/zsh/current-theme.zsh"
-mkdir -p "$PWD/.config/zellij/themes"
-[ -f "$PWD/.config/zellij/themes/dotfiles.kdl" ] || cp "$PWD/.config/zellij/palettes/dive-to-the-heart.kdl" "$PWD/.config/zellij/themes/dotfiles.kdl"
-mkdir -p "$PWD/.config/nvim/colors"
-[ -f "$PWD/.config/nvim/colors/dotfiles.lua" ] || cp "$PWD/.config/nvim/themes/dive-to-the-heart.lua" "$PWD/.config/nvim/colors/dotfiles.lua"
+"$PWD/scripts/set-theme.sh" --seed dive-to-the-heart
+
+# zsh plugin manager; .zshrc sources it from here
+ANTIDOTE="$HOME/.antidote"
+if [ ! -d "$ANTIDOTE" ]; then
+  git clone --depth 1 https://github.com/mattmc3/antidote.git "$ANTIDOTE"
+fi
 
 # tmux plugin manager (plugins are not vendored)
 TPM="$HOME/.config/tmux/plugins/tpm"
@@ -44,5 +51,3 @@ fi
 
 echo
 echo "done. open tmux and press <prefix> + I (prefix is C-s) to install plugins."
-echo "keep this in ~/.zshrc:"
-echo '  eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/current.omp.json)"'

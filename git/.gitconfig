@@ -6,7 +6,6 @@
 
 [core]
 	sshCommand = ssh -i ~/.ssh/rayyanhunerkargit
-	excludesfile = ~/.gitignore
 
 [init]
 	defaultBranch = main

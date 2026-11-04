@@ -13,6 +13,7 @@ with one command.
 | zsh | `zsh/.zshrc`, `zsh/.zsh_plugins.txt` | antidote plugin list; `.zsh_plugins.zsh` bundle is generated, not tracked |
 | git | `git/.gitconfig`, `git/.gitconfig-work` | personal by default; work identity applies under `~/Workspace/Morfius/` |
 | nvim | `.config/nvim/` | AstroNvim v6 template; `lazy-lock.json` is tracked so plugin versions pin |
+| Zed | `.config/zed/` | `settings.json` selects the theme named `Dotfiles`; `themes/` and `prompts/` are runtime state, gitignored |
 | podman | `containers/.config/containers/` | `containers.conf`, stowed into `~` |
 
 ## Themes
@@ -21,14 +22,24 @@ with one command.
 set-theme <name>    # tab-completes
 ```
 
-Switches **ten** tools at once — kitty, tmux, zellij, oh-my-posh, fastfetch, nvim,
-git, fzf, bat and eza. Each theme's files are copied to a gitignored `current-*`
-destination (seeded from `dive-to-the-heart` by `install.sh`), then kitty and tmux
-live-reload. Run `zeload` after — the prompt and the env-var tools are per-session.
+Switches **eleven** tools at once — kitty, tmux, zellij, oh-my-posh, fastfetch, nvim,
+Zed, git, fzf, bat and eza. Each theme's files are copied to a gitignored `current-*`
+destination (seeded from `dive-to-the-heart` by `install.sh`), then kitty, zellij,
+Zed and tmux live-reload. Run `zeload` after — the prompt and the env-var tools are per-session.
+
+`set-theme` leaves the font alone. To switch both at once:
+
+```sh
+set-look <theme>          # theme plus its paired font
+set-look <theme> <font>   # theme plus a font you choose
+```
+
+Pairings live in `scripts/set-look.sh`; run it with no args to list them.
 
 Add a theme — every file shares one basename. Write the handwritten ones, add an
 entry to the theme table in `scripts/gen-theme-extras.py`, then run
-`scripts/gen-theme-extras.py && scripts/gen-nvim-themes.py`:
+`scripts/gen-theme-extras.py && scripts/gen-nvim-themes.py && scripts/gen-zed-themes.py`. `scripts/check.sh` then
+confirms nothing is missing:
 
 | Dir | File | Note |
 |---|---|---|
@@ -41,6 +52,7 @@ entry to the theme table in `scripts/gen-theme-extras.py`, then run
 | `.config/git/themes/` | `<name>.gitconfig` | **generated** by `gen-theme-extras.py` — diff/status/branch colors |
 | `.config/zsh/themes/` | `<name>.zsh` | **generated** by `gen-theme-extras.py` — `FZF_DEFAULT_OPTS`, `BAT_THEME`, `EZA_COLORS` |
 | `.config/nvim/themes/` | `<name>.lua` | **generated** from the kitty theme — see below |
+| `.config/zed/palettes/` | `<name>.json` | **generated** from the kitty theme by `gen-zed-themes.py`; same color roles as nvim |
 
 `set-theme` completes from `.config/kitty/themes/`, so a new theme shows up in tab
 completion as soon as its kitty file exists.
@@ -60,6 +72,10 @@ Each theme defines its own prompt *structure*, not just a palette:
 | destiny-islands | plain text, tide marks | `󰖙 .dotfiles ≈  main` |
 | caelid | flame-edged blocks | ` 󰈸 .dotfiles   main ` |
 | hallownest | one line, git on the right | `.dotfiles ◆` … `main · 15:04` |
+| greenpath | two lines, a leaf and prose | ` .dotfiles on main`, `❯` |
+| crystal-peak | one line, faceted | `◇ .dotfiles ◇ main ◆` |
+| castlevania | two lines, gothic crosses | `† .dotfiles ── main`, `»` |
+| black-gold | one line, gold plaque on the path | ` .dotfiles  main ▸` |
 | y2k-vaporwave | slanted blocks | ` 󰓎 .dotfiles   main ` |
 
 All of them share the same segments: path, git (dirty/ahead/behind), root, exec time
@@ -183,8 +199,23 @@ the `.config` package folds into `~/.config`.
 
 ```sh
 git clone <repo> ~/.dotfiles
-~/.dotfiles/install.sh          # stow every package, seed current-* files, clone tpm
+~/.dotfiles/install.sh          # brew bundle, stow, mise install, seed current-* files, clone tpm
+~/.dotfiles/scripts/defaults.sh # optional: macOS defaults; --system adds Touch ID sudo, firewall, lock
 ```
+
+### Packages and toolchains
+
+Two files, split by who might pin a version:
+
+| File | Owns | Apply |
+|---|---|---|
+| `Brewfile` | shell and terminal tools, everyday CLIs, system libraries, apps, fonts | `brew bundle --file ~/.dotfiles/Brewfile` |
+| `.config/mise/config.toml` | node, python, java, go, bun, pnpm, uv, maven, and dev CLIs (terraform, sqlc, k6, biome, bazel, just, ...) | `mise install` |
+
+A project overrides the mise versions with its own `mise.toml`, or the
+`.nvmrc` / `.python-version` / `.java-version` it already has. `mise use -g
+node@24` edits the tracked config. `brew bundle cleanup --file ~/.dotfiles/Brewfile`
+lists anything installed but not declared; add `--force` to remove it.
 
 Or by hand:
 
@@ -217,11 +248,16 @@ set-font <name>    # tab-completes
 | `maple-mono` | rounded terminals, soft |
 | `recursive-casual` | humanist and rounded; pairs with `frutiger-aero` |
 | `recursive-linear` | same family, straighter — a quieter everyday face |
+| `blex-mono` | IBM Plex slab serifs; classical, pairs with `castlevania` and `black-gold` |
+| `departure-mono` | pixel face, regular weight only; pairs with `y2k-vaporwave` |
+| `fantasque-sans-mono` | hand-drawn; pairs with `greenpath` and `twilight-town` |
 
 Live-reloads any running kitty windows (remote control is on, local socket only).
 Add a font: drop a `<name>.conf` (font_family/bold_font/italic_font/bold_italic_font)
 in `.config/kitty/fonts/`. Every glyph the themes use — powerline arrows, rounded
 caps, branch, crown, droplet, language icons — is verified present in all of these.
+Plain symbols like `◆ ▸ ● ✦` are missing from some of them; kitty draws those from a
+fallback font. Use the `Nerd Font Mono` family: `check.sh` fails if a name falls back to Menlo.
 
 ## Cheatsheet
 
@@ -300,17 +336,13 @@ git whoami
 ## nvim
 
 [AstroNvim](https://github.com/AstroNvim/AstroNvim) v6 via the official template.
-`astrocore.lua`, `user.lua` and `polish.lua` are still the template's
-`if true then return {} end` stub — delete that first line to activate one.
+The template's unused stubs (`astrocore.lua`, `user.lua`, `polish.lua`) are removed.
 
 | File | Controls |
 |---|---|
 | `lua/plugins/astroui.lua` | colorscheme, highlight overrides, icons |
-| `lua/plugins/astrocore.lua` | options, keymaps, autocmds (stub) |
 | `lua/plugins/astrolsp.lua` | LSP servers and behaviour |
-| `lua/plugins/user.lua` | your own plugin specs (stub) |
 | `lua/community.lua` | astrocommunity language packs |
-| `lua/polish.lua` | last-run vimscript/lua (stub) |
 
 ### Colorscheme
 
@@ -405,8 +437,10 @@ fresh machine reproduces the same set. Commit it when `:Lazy update` changes it.
 ## Notes
 
 - `direnv` is hooked; drop an `.envrc` in a project and `direnv allow` it to get
-  a per-directory environment (auto-activates a uv `.venv`, pins node, scopes
-  work-only vars).
+  a per-directory environment (auto-activates a uv `.venv`, scopes work-only
+  vars). Pin tool versions in `mise.toml` instead; mise can also hold `[env]`.
+- mise's shims dir is on PATH as well as `mise activate`, so nvim, LSP servers
+  and mason find node/python without an interactive shell.
 - forgit's aliases are remapped to a `gf` prefix in `.zshrc` **before** the
   bundle loads. At defaults it takes `ga`/`glo`/`gd`/`gco`/`grb` from the
   oh-my-zsh git plugin, and since it loads later it wins silently.

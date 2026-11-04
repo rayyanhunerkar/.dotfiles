@@ -1,17 +1,126 @@
 // castle-oblivion — zellij colors. Copied to ~/.config/zellij/themes/dotfiles.kdl
-// by `set-theme`. Always named `dotfiles`, the name config.kdl selects.
+// by `set-theme`, and zellij reloads that directory on its own.
+// Always named `dotfiles`, the name config.kdl selects.
 themes {
     dotfiles {
-        fg "#f0ede4"
-        bg "#4a4a56"
-        black "#2b2b33"
-        red "#f0787e"
-        green "#8fb89e"
-        yellow "#d9b76a"
-        blue "#a8bcd4"
-        magenta "#c49ab4"
-        cyan "#8fb89e"
-        white "#f0ede4"
-        orange "#d9b76a"
+        text_unselected {
+            base "#f0ede4"
+            background "#2b2b33"
+            emphasis_0 "#d9b76a"
+            emphasis_1 "#8fb89e"
+            emphasis_2 "#8fb89e"
+            emphasis_3 "#c49ab4"
+        }
+        text_selected {
+            base "#f0ede4"
+            background "#4a4a56"
+            emphasis_0 "#d9b76a"
+            emphasis_1 "#8fb89e"
+            emphasis_2 "#8fb89e"
+            emphasis_3 "#c49ab4"
+        }
+        ribbon_unselected {
+            base "#f0ede4"
+            background "#4a4a56"
+            emphasis_0 "#f0787e"
+            emphasis_1 "#d9b76a"
+            emphasis_2 "#c49ab4"
+            emphasis_3 "#a8bcd4"
+        }
+        ribbon_selected {
+            base "#2b2b33"
+            background "#8fb89e"
+            emphasis_0 "#f0787e"
+            emphasis_1 "#d9b76a"
+            emphasis_2 "#c49ab4"
+            emphasis_3 "#a8bcd4"
+        }
+        table_title {
+            base "#8fb89e"
+            background "#2b2b33"
+            emphasis_0 "#d9b76a"
+            emphasis_1 "#8fb89e"
+            emphasis_2 "#8fb89e"
+            emphasis_3 "#c49ab4"
+        }
+        table_cell_unselected {
+            base "#f0ede4"
+            background "#2b2b33"
+            emphasis_0 "#d9b76a"
+            emphasis_1 "#8fb89e"
+            emphasis_2 "#8fb89e"
+            emphasis_3 "#c49ab4"
+        }
+        table_cell_selected {
+            base "#f0ede4"
+            background "#4a4a56"
+            emphasis_0 "#d9b76a"
+            emphasis_1 "#8fb89e"
+            emphasis_2 "#8fb89e"
+            emphasis_3 "#c49ab4"
+        }
+        list_unselected {
+            base "#f0ede4"
+            background "#2b2b33"
+            emphasis_0 "#d9b76a"
+            emphasis_1 "#8fb89e"
+            emphasis_2 "#8fb89e"
+            emphasis_3 "#c49ab4"
+        }
+        list_selected {
+            base "#f0ede4"
+            background "#4a4a56"
+            emphasis_0 "#d9b76a"
+            emphasis_1 "#8fb89e"
+            emphasis_2 "#8fb89e"
+            emphasis_3 "#c49ab4"
+        }
+        frame_unselected {
+            base "#4a4a56"
+            emphasis_0 "#d9b76a"
+            emphasis_1 "#a8bcd4"
+            emphasis_2 "#c49ab4"
+            emphasis_3 "#8fb89e"
+        }
+        frame_selected {
+            base "#8fb89e"
+            emphasis_0 "#d9b76a"
+            emphasis_1 "#a8bcd4"
+            emphasis_2 "#c49ab4"
+            emphasis_3 "#8fb89e"
+        }
+        frame_highlight {
+            base "#d9b76a"
+            emphasis_0 "#c49ab4"
+            emphasis_1 "#8fb89e"
+            emphasis_2 "#d9b76a"
+            emphasis_3 "#f0787e"
+        }
+        exit_code_success {
+            base "#8fb89e"
+            emphasis_0 "#d9b76a"
+            emphasis_1 "#a8bcd4"
+            emphasis_2 "#c49ab4"
+            emphasis_3 "#8fb89e"
+        }
+        exit_code_error {
+            base "#f0787e"
+            emphasis_0 "#d9b76a"
+            emphasis_1 "#a8bcd4"
+            emphasis_2 "#c49ab4"
+            emphasis_3 "#8fb89e"
+        }
+        multiplayer_user_colors {
+            player_1 "#8fb89e"
+            player_2 "#a8bcd4"
+            player_3 "#c49ab4"
+            player_4 "#d9b76a"
+            player_5 "#8fb89e"
+            player_6 "#f0787e"
+            player_7 "#8fb89e"
+            player_8 "#a8bcd4"
+            player_9 "#c49ab4"
+            player_10 "#d9b76a"
+        }
     }
 }

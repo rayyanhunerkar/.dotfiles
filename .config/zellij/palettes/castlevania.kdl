@@ -1,0 +1,126 @@
+// castlevania — zellij colors. Copied to ~/.config/zellij/themes/dotfiles.kdl
+// by `set-theme`, and zellij reloads that directory on its own.
+// Always named `dotfiles`, the name config.kdl selects.
+themes {
+    dotfiles {
+        text_unselected {
+            base "#efe3da"
+            background "#120a10"
+            emphasis_0 "#eeb04a"
+            emphasis_1 "#e8455a"
+            emphasis_2 "#7fb08a"
+            emphasis_3 "#a77fd1"
+        }
+        text_selected {
+            base "#efe3da"
+            background "#3e2230"
+            emphasis_0 "#eeb04a"
+            emphasis_1 "#e8455a"
+            emphasis_2 "#7fb08a"
+            emphasis_3 "#a77fd1"
+        }
+        ribbon_unselected {
+            base "#efe3da"
+            background "#3e2230"
+            emphasis_0 "#ff7a66"
+            emphasis_1 "#eeb04a"
+            emphasis_2 "#a77fd1"
+            emphasis_3 "#7fa6d6"
+        }
+        ribbon_selected {
+            base "#120a10"
+            background "#e8455a"
+            emphasis_0 "#ff7a66"
+            emphasis_1 "#eeb04a"
+            emphasis_2 "#a77fd1"
+            emphasis_3 "#7fa6d6"
+        }
+        table_title {
+            base "#e8455a"
+            background "#120a10"
+            emphasis_0 "#eeb04a"
+            emphasis_1 "#e8455a"
+            emphasis_2 "#7fb08a"
+            emphasis_3 "#a77fd1"
+        }
+        table_cell_unselected {
+            base "#efe3da"
+            background "#120a10"
+            emphasis_0 "#eeb04a"
+            emphasis_1 "#e8455a"
+            emphasis_2 "#7fb08a"
+            emphasis_3 "#a77fd1"
+        }
+        table_cell_selected {
+            base "#efe3da"
+            background "#3e2230"
+            emphasis_0 "#eeb04a"
+            emphasis_1 "#e8455a"
+            emphasis_2 "#7fb08a"
+            emphasis_3 "#a77fd1"
+        }
+        list_unselected {
+            base "#efe3da"
+            background "#120a10"
+            emphasis_0 "#eeb04a"
+            emphasis_1 "#e8455a"
+            emphasis_2 "#7fb08a"
+            emphasis_3 "#a77fd1"
+        }
+        list_selected {
+            base "#efe3da"
+            background "#3e2230"
+            emphasis_0 "#eeb04a"
+            emphasis_1 "#e8455a"
+            emphasis_2 "#7fb08a"
+            emphasis_3 "#a77fd1"
+        }
+        frame_unselected {
+            base "#3e2230"
+            emphasis_0 "#eeb04a"
+            emphasis_1 "#7fa6d6"
+            emphasis_2 "#a77fd1"
+            emphasis_3 "#7fb08a"
+        }
+        frame_selected {
+            base "#e8455a"
+            emphasis_0 "#eeb04a"
+            emphasis_1 "#7fa6d6"
+            emphasis_2 "#a77fd1"
+            emphasis_3 "#7fb08a"
+        }
+        frame_highlight {
+            base "#eeb04a"
+            emphasis_0 "#a77fd1"
+            emphasis_1 "#e8455a"
+            emphasis_2 "#eeb04a"
+            emphasis_3 "#ff7a66"
+        }
+        exit_code_success {
+            base "#7fb08a"
+            emphasis_0 "#eeb04a"
+            emphasis_1 "#7fa6d6"
+            emphasis_2 "#a77fd1"
+            emphasis_3 "#7fb08a"
+        }
+        exit_code_error {
+            base "#ff7a66"
+            emphasis_0 "#eeb04a"
+            emphasis_1 "#7fa6d6"
+            emphasis_2 "#a77fd1"
+            emphasis_3 "#7fb08a"
+        }
+        multiplayer_user_colors {
+            player_1 "#e8455a"
+            player_2 "#7fa6d6"
+            player_3 "#a77fd1"
+            player_4 "#eeb04a"
+            player_5 "#7fb08a"
+            player_6 "#ff7a66"
+            player_7 "#e8455a"
+            player_8 "#7fa6d6"
+            player_9 "#a77fd1"
+            player_10 "#eeb04a"
+        }
+    }
+}

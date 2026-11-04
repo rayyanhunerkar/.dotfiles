@@ -1,0 +1,42 @@
+# castlevania — git colors. Copied to ~/.config/git/current-theme.gitconfig
+# by `set-theme`; included from ~/.gitconfig.
+[color]
+	ui = auto
+
+[color "diff"]
+	meta = "#8f7482"
+	frag = "#e8455a"
+	func = "#7fa6d6"
+	old = "#ff7a66"
+	new = "#7fb08a"
+	commit = "#eeb04a"
+	whitespace = "reverse #ff7a66"
+
+[color "diff-highlight"]
+	oldNormal = "#ff7a66"
+	oldHighlight = "#ff7a66 reverse"
+	newNormal = "#7fb08a"
+	newHighlight = "#7fb08a reverse"
+
+[color "status"]
+	header = "#8f7482"
+	added = "#7fb08a"
+	changed = "#eeb04a"
+	untracked = "#ff7a66"
+	branch = "#e8455a bold"
+	nobranch = "#ff7a66"
+	localBranch = "#e8455a"
+	remoteBranch = "#a77fd1"
+
+[color "branch"]
+	current = "#e8455a bold"
+	local = "#efe3da"
+	remote = "#a77fd1"
+	upstream = "#7fa6d6"
+
+[color "decorate"]
+	branch = "#e8455a bold"
+	remoteBranch = "#a77fd1"
+	tag = "#eeb04a"
+	stash = "#7fa6d6"
+	HEAD = "#e8455a"

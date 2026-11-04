@@ -9,7 +9,8 @@ active theme's palette, so every shape works with every theme.
 import json
 import os
 
-DST = os.path.expanduser("~/.dotfiles/.config/oh-my-posh/shapes")
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DST = os.path.join(REPO, ".config/oh-my-posh/shapes")
 os.makedirs(DST, exist_ok=True)
 
 BRANCH, FOLDER, ROOT, CLOCK = "", "", "", ""

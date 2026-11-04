@@ -1,0 +1,17 @@
+#compdef set-look.sh set-look
+
+_set-look() {
+  local -a names
+  case $CURRENT in
+    2)
+      names=($HOME/.config/kitty/themes/*.conf(N:t:r))
+      _describe 'theme' names
+      ;;
+    3)
+      names=($HOME/.config/kitty/fonts/*.conf(N:t:r))
+      _describe 'font' names
+      ;;
+  esac
+}
+
+_set-look "$@"

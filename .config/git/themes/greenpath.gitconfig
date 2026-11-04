@@ -1,0 +1,42 @@
+# greenpath — git colors. Copied to ~/.config/git/current-theme.gitconfig
+# by `set-theme`; included from ~/.gitconfig.
+[color]
+	ui = auto
+
+[color "diff"]
+	meta = "#6a8574"
+	frag = "#8fcf6e"
+	func = "#5fa8c4"
+	old = "#d9625a"
+	new = "#57c7a0"
+	commit = "#e0b64f"
+	whitespace = "reverse #d9625a"
+
+[color "diff-highlight"]
+	oldNormal = "#d9625a"
+	oldHighlight = "#d9625a reverse"
+	newNormal = "#57c7a0"
+	newHighlight = "#57c7a0 reverse"
+
+[color "status"]
+	header = "#6a8574"
+	added = "#57c7a0"
+	changed = "#e0b64f"
+	untracked = "#d9625a"
+	branch = "#8fcf6e bold"
+	nobranch = "#d9625a"
+	localBranch = "#8fcf6e"
+	remoteBranch = "#b08fc7"
+
+[color "branch"]
+	current = "#8fcf6e bold"
+	local = "#e3efe2"
+	remote = "#b08fc7"
+	upstream = "#5fa8c4"
+
+[color "decorate"]
+	branch = "#8fcf6e bold"
+	remoteBranch = "#b08fc7"
+	tag = "#e0b64f"
+	stash = "#5fa8c4"
+	HEAD = "#8fcf6e"

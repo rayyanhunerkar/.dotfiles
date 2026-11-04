@@ -26,6 +26,9 @@ zsh/.zshrc.local
 .config/git/current-theme.gitconfig
 .config/zsh/current-theme.zsh
 .config/zellij/themes/
+.config/zed/themes/
+.config/zed/prompts/
+.config/zed/conversations/
 
 # --- nvim: runtime state, not config ---
 .config/nvim/.neoconf.json

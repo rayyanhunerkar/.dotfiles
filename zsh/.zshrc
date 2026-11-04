@@ -12,8 +12,8 @@
 #   6. Prompt and cd       — zoxide/oh-my-posh last; they wrap cd and the prompt
 #   7. Local overrides     — untracked, always last word
 #
-# Startup budget is ~0.7s. `nvm` and `sdkman` are lazy because sourcing them
-# eagerly cost ~570ms of that. Measure before adding anything eager:
+# Startup budget is ~0.3s. Runtimes come from mise, which costs a few ms.
+# Measure before adding anything eager:
 #
 #   for i in 1 2 3; do /usr/bin/time zsh -ic exit; done
 
@@ -23,34 +23,17 @@ typeset -U path fpath
 
 # ═══════════════════════════════════════════════════════════ RUNTIMES ═══
 # Order within this block decides which interpreter wins: later prepends to
-# PATH take precedence, so pyenv shadows conda by design.
+# PATH take precedence.
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$("$HOME/miniconda3/bin/conda" 'shell.zsh' 'hook' 2>/dev/null)"
-if [ $? -eq 0 ]; then
-  eval "$__conda_setup"
-else
-  if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
-    . "$HOME/miniconda3/etc/profile.d/conda.sh"
-  else
-    export PATH="$HOME/miniconda3/bin:$PATH"
-  fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && path=("$PYENV_ROOT/bin" $path)
-command -v pyenv >/dev/null && eval "$(pyenv init -)"
-
-# bun
+# bun — the binary comes from mise; this is where `bun add -g` puts globals.
 export BUN_INSTALL="$HOME/.bun"
 path=("$BUN_INSTALL/bin" $path)
-[[ -s "$BUN_INSTALL/_bun" ]] && source "$BUN_INSTALL/_bun"
+# `_bun` is a #compdef file: put its dir on fpath for compinit to pick up. Never
+# `source` it — it runs its own compinit against an early, partial fpath, so
+# every shell built .zcompdump twice and each build overwrote the other (~150ms).
+[[ -s "$BUN_INSTALL/_bun" ]] && fpath=("$BUN_INSTALL" $fpath)
 
-# pnpm
+# pnpm — likewise, the global bin dir for `pnpm add -g`.
 export PNPM_HOME="$HOME/Library/pnpm"
 path=("$PNPM_HOME" $path)
 
@@ -67,67 +50,20 @@ path=("$HOME/.dotfiles/scripts" $path)
 # podman
 export PATH="/opt/podman/bin:$PATH"
 
-# ─────────────────────────────────────────────────────── lazy runtimes ───
-# Each shim replaces itself with the real thing on first call. Sourcing these
-# eagerly costs ~570ms combined, and most shells never touch them.
+# ~/.local/bin — standalone installers drop binaries here (claude, pre-commit via
+# `uv tool`). Before mise, so a stray copy here never shadows a pinned version.
+path=("$HOME/.local/bin" $path)
 
-# Defines stub functions that source $2 on first invocation of any of $@.
-_lazy_load() {
-  local loader=$1 init=$2
-  shift 2
-  local cmds=("$@") cmd
-  eval "$loader() {
-    unset -f ${cmds[*]} $loader 2>/dev/null
-    $init
-  }"
-  for cmd in $cmds; do
-    eval "$cmd() { $loader; $cmd \"\$@\"; }"
-  done
-}
-
-# nvm: put the default version's bin directory straight on PATH, and lazy-load
-# only `nvm` itself.
+# mise: node, python, java, go, bun, pnpm, uv and pinned dev CLIs, per
+# directory. Last in this block so its versions win. Config in
+# ~/.config/mise/config.toml, overridden by a project's mise.toml.
 #
-# node/npm/npx must NOT be function shims. A shim exists only in an interactive
-# zsh, so `command -v node` returns "node" rather than a path and anything
-# spawned outside the shell — nvim, LSP servers, mason — fails with
-# "Node JS not found: `node` is not executable".
-export NVM_DIR="$HOME/.nvm"
-() {
-  local ver="" bin
-  [[ -r $NVM_DIR/alias/default ]] && ver=$(<"$NVM_DIR/alias/default")
-  # `default` may point at another alias (lts/*, stable); follow the chain.
-  local guard=0
-  while [[ -n $ver && -r "$NVM_DIR/alias/$ver" && guard -lt 5 ]]; do
-    ver=$(<"$NVM_DIR/alias/$ver")
-    ((guard++))
-  done
-  [[ -n $ver ]] || return
-  bin="$NVM_DIR/versions/node/v${ver#v}/bin"
-  [[ -d $bin ]] && path=("$bin" $path)
-}
-
-# The version manager is the slow part (~260ms); defer just that.
-_lazy_load _load_nvm '
-  [ -s /opt/homebrew/opt/nvm/nvm.sh ] && . /opt/homebrew/opt/nvm/nvm.sh
-  [ -s /opt/homebrew/opt/nvm/etc/bash_completion.d/nvm ] && . /opt/homebrew/opt/nvm/etc/bash_completion.d/nvm
-' nvm
-
-# sdkman: same reasoning as nvm. Installed tools go straight on PATH so nvim and
-# LSP servers see them; only `sdk` itself is lazy.
-export SDKMAN_DIR="$HOME/.sdkman"
-() {
-  local bin
-  for bin in "$SDKMAN_DIR"/candidates/*/current/bin(N); do
-    path=("$bin" $path)
-  done
-  [[ -d $SDKMAN_DIR/candidates/java/current ]] &&
-    export JAVA_HOME="$SDKMAN_DIR/candidates/java/current"
-}
-
-_lazy_load _load_sdkman '
-  [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-' sdk
+# The shims dir goes on PATH as well as `activate`: shims are real executables,
+# so nvim, LSP servers and mason find node/python even outside an interactive
+# shell. `activate` then puts the exact per-directory versions ahead of them and
+# sets JAVA_HOME and friends.
+path=("$HOME/.local/share/mise/shims" $path)
+command -v mise >/dev/null && eval "$(mise activate zsh)"
 
 # ════════════════════════════════════════════════ OPTIONS & HISTORY ═══
 
@@ -155,7 +91,7 @@ export VISUAL="$EDITOR"
 # bundle still points at the deleted paths.
 export ANTIDOTE_HOME="$HOME/.local/share/antidote"
 
-source "$HOME/.antidote/antidote.zsh"
+[[ -f "$HOME/.antidote/antidote.zsh" ]] && source "$HOME/.antidote/antidote.zsh"
 zsh_plugins="$HOME/.zsh_plugins"
 
 # ── plugin settings that must be set BEFORE the bundle is sourced ─────────
@@ -190,6 +126,10 @@ export YSU_HARDCORE=0 # nag, don't refuse to run the command
 # bundle references something no longer on disk — a timestamp check alone can't
 # see that the clones were deleted out from under it.
 () {
+  if ((! $+functions[antidote])); then
+    print -u2 "antidote missing, plugins not loaded: run ~/.dotfiles/install.sh"
+    return
+  fi
   local rebuild=0
   [[ ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]] || rebuild=1
   if ((! rebuild)); then
@@ -198,15 +138,15 @@ export YSU_HARDCORE=0 # nag, don't refuse to run the command
   fi
   ((rebuild)) && antidote bundle <${zsh_plugins}.txt >${zsh_plugins}.zsh
 }
-source ${zsh_plugins}.zsh
+[[ -f ${zsh_plugins}.zsh ]] && source ${zsh_plugins}.zsh
 
 # ═══════════════════════════════════════════════════════ COMPLETION ═══
 
 fpath=("$HOME/.config/zsh/completions" $fpath)
 
-# NOTE: this deliberately runs a full compinit on every shell (~0.5s of the
-# ~0.7s startup). Attempts to cache it with `compinit -C` cut startup to 0.19s
-# but silently drop ~250 completions — docker, go, node, bun, cmake, openssl,
+# NOTE: this deliberately runs a full compinit on every shell. Attempts to cache
+# it with `compinit -C` start faster but silently drop ~250 completions —
+# docker, go, node, bun, cmake, openssl,
 # protoc, mvn among them — because `-C` trusts the dump and skips rescanning
 # fpath, and something in the plugin chain (use-omz defers and wraps compinit)
 # does not survive that. Correctness over speed until that is understood.
@@ -224,8 +164,7 @@ setopt EXTENDED_GLOB
 # which reads FZF_DEFAULT_OPTS at load.
 [[ -f "$HOME/.config/zsh/current-theme.zsh" ]] && source "$HOME/.config/zsh/current-theme.zsh"
 
-# fzf: CTRL-T files, ALT-C directories, CTRL-R history (overrides the binding
-# from zsh-fzf-history-search loaded above).
+# fzf: CTRL-T files, ALT-C directories, CTRL-R history.
 command -v fzf >/dev/null && source <(fzf --zsh)
 
 # direnv: per-directory environment. Auto-activates a uv `.venv` on cd, pins
@@ -250,6 +189,7 @@ alias vi="nvim"
 alias set-theme="set-theme.sh"
 alias set-font="set-font.sh"
 alias set-prompt="set-prompt.sh"
+alias set-look="set-look.sh"
 
 command -v bat >/dev/null && alias cat="bat"
 if command -v eza >/dev/null; then
@@ -273,3 +213,5 @@ command -v oh-my-posh >/dev/null &&
 # Untracked: infra hostnames, work aliases, anything machine-specific.
 
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+
+

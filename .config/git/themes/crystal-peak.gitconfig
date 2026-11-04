@@ -1,0 +1,42 @@
+# crystal-peak — git colors. Copied to ~/.config/git/current-theme.gitconfig
+# by `set-theme`; included from ~/.gitconfig.
+[color]
+	ui = auto
+
+[color "diff"]
+	meta = "#85759a"
+	frag = "#f27fc0"
+	func = "#84dcdc"
+	old = "#e8566f"
+	new = "#7fd4b0"
+	commit = "#f2c078"
+	whitespace = "reverse #e8566f"
+
+[color "diff-highlight"]
+	oldNormal = "#e8566f"
+	oldHighlight = "#e8566f reverse"
+	newNormal = "#7fd4b0"
+	newHighlight = "#7fd4b0 reverse"
+
+[color "status"]
+	header = "#85759a"
+	added = "#7fd4b0"
+	changed = "#f2c078"
+	untracked = "#e8566f"
+	branch = "#f27fc0 bold"
+	nobranch = "#e8566f"
+	localBranch = "#f27fc0"
+	remoteBranch = "#8fb4f0"
+
+[color "branch"]
+	current = "#f27fc0 bold"
+	local = "#f3e8f2"
+	remote = "#8fb4f0"
+	upstream = "#84dcdc"
+
+[color "decorate"]
+	branch = "#f27fc0 bold"
+	remoteBranch = "#8fb4f0"
+	tag = "#f2c078"
+	stash = "#84dcdc"
+	HEAD = "#f27fc0"

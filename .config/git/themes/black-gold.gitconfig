@@ -1,0 +1,42 @@
+# black-gold — git colors. Copied to ~/.config/git/current-theme.gitconfig
+# by `set-theme`; included from ~/.gitconfig.
+[color]
+	ui = auto
+
+[color "diff"]
+	meta = "#8a7a52"
+	frag = "#d4af37"
+	func = "#f5d76e"
+	old = "#e5484d"
+	new = "#a3b86c"
+	commit = "#ff9f1c"
+	whitespace = "reverse #e5484d"
+
+[color "diff-highlight"]
+	oldNormal = "#e5484d"
+	oldHighlight = "#e5484d reverse"
+	newNormal = "#a3b86c"
+	newHighlight = "#a3b86c reverse"
+
+[color "status"]
+	header = "#8a7a52"
+	added = "#a3b86c"
+	changed = "#ff9f1c"
+	untracked = "#e5484d"
+	branch = "#d4af37 bold"
+	nobranch = "#e5484d"
+	localBranch = "#d4af37"
+	remoteBranch = "#dba392"
+
+[color "branch"]
+	current = "#d4af37 bold"
+	local = "#f5ecd6"
+	remote = "#dba392"
+	upstream = "#f5d76e"
+
+[color "decorate"]
+	branch = "#d4af37 bold"
+	remoteBranch = "#dba392"
+	tag = "#ff9f1c"
+	stash = "#f5d76e"
+	HEAD = "#d4af37"

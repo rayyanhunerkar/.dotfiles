@@ -1,0 +1,135 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 4,
+  "final_space": true,
+  "palette": {
+    "bg": "#0b1410",
+    "fg": "#e3efe2",
+    "accent": "#8fcf6e",
+    "alt": "#5fa8c4",
+    "warn": "#e0b64f",
+    "bad": "#d9625a",
+    "good": "#57c7a0",
+    "extra": "#b08fc7",
+    "dim": "#6a8574",
+    "line": "#26392d"
+  },
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "path",
+          "style": "plain",
+          "foreground": "p:fg",
+          "properties": {
+            "style": "folder"
+          },
+          "template": "<p:accent></> <b>{{ .Path }}</b>"
+        },
+        {
+          "type": "git",
+          "style": "plain",
+          "foreground": "p:accent",
+          "properties": {
+            "branch_icon": "",
+            "fetch_status": true
+          },
+          "template": " <p:dim>on</> {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}<p:warn> *</>{{ end }}<p:dim>{{ if gt .Behind 0 }} ↓{{ .Behind }}{{ end }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}</>"
+        },
+        {
+          "type": "root",
+          "style": "plain",
+          "foreground": "p:bad",
+          "template": " "
+        },
+        {
+          "type": "executiontime",
+          "style": "plain",
+          "foreground": "p:dim",
+          "properties": {
+            "threshold": 2000,
+            "style": "austin"
+          },
+          "template": " {{ .FormattedMs }}"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "status",
+          "style": "plain",
+          "foreground": "p:fg",
+          "properties": {
+            "always_enabled": true
+          },
+          "template": "{{ if .Error }}<p:bad>{{ .Code }} ❯</>{{ else }}<p:accent>❯</>{{ end }}"
+        }
+      ]
+    },
+    {
+      "type": "rprompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "type": "node",
+          "style": "plain",
+          "foreground": "p:dim",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          },
+          "template": "{{ .Full }} <p:line>·</> "
+        },
+        {
+          "type": "python",
+          "style": "plain",
+          "foreground": "p:dim",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          },
+          "template": "{{ .Full }} <p:line>·</> "
+        },
+        {
+          "type": "golang",
+          "style": "plain",
+          "foreground": "p:dim",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          },
+          "template": "{{ .Full }} <p:line>·</> "
+        },
+        {
+          "type": "rust",
+          "style": "plain",
+          "foreground": "p:dim",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files"
+          },
+          "template": "{{ .Full }} <p:line>·</> "
+        },
+        {
+          "type": "time",
+          "style": "plain",
+          "foreground": "p:dim",
+          "properties": {
+            "time_format": "15:04"
+          },
+          "template": "{{ .CurrentDate | date .Format }}"
+        }
+      ]
+    }
+  ]
+}

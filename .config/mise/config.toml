@@ -1,0 +1,31 @@
+# Global toolchain. A project's own mise.toml (or .nvmrc / .python-version /
+# .java-version) overrides these inside that directory.
+#
+#   mise install          # install everything below
+#   mise use -g node@24   # bump a version; edits this file
+#   mise outdated         # what has a newer release
+
+[tools]
+# runtimes
+node = "22"
+python = "3.15"
+java = "temurin-21"
+go = "latest"
+bun = "latest"
+pnpm = "latest"
+uv = "latest"
+maven = "3.9"
+
+# dev CLIs that projects may want to pin
+terraform = "latest"
+sqlc = "latest"
+k6 = "latest"
+biome = "latest"
+buildifier = "latest"
+bazel = "latest" # pin per project in mise.toml (mise doesn't read .bazelversion)
+grpcurl = "latest"
+just = "latest"
+
+[settings]
+# Honour the version files existing projects already carry.
+idiomatic_version_file_enable_tools = ["node", "python", "java"]

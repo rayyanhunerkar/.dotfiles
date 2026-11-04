@@ -1,14 +1,24 @@
 #!/usr/bin/env bash
 # Switch the color theme across kitty, tmux, zellij, oh-my-posh, fastfetch, nvim,
-# git, and the env-var tools (fzf, bat, eza).
+# Zed, git, and the env-var tools (fzf, bat, eza). zellij and Zed watch their
+# themes/ dirs and recolor on their own.
 # Usage: set-theme.sh <name>   — run with no args to list what's available.
+#        set-theme.sh --seed <name>   — fill in only missing files, no live reload
+#                                       (install.sh uses this, so the table below
+#                                       is the one list of theme files).
 set -euo pipefail
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SRC="$DOTFILES/.config"
 
+SEED=0
+if [ "${1:-}" = --seed ]; then
+  SEED=1
+  shift
+fi
+
 if [ $# -ne 1 ] || [ ! -f "$SRC/kitty/themes/$1.conf" ]; then
-  echo "usage: $(basename "$0") <theme>"
+  echo "usage: $(basename "$0") [--seed] <theme>"
   echo "available:"
   for f in "$SRC"/kitty/themes/*.conf; do echo "  $(basename "${f%.conf}")"; done
   exit 1
@@ -20,6 +30,9 @@ NAME="$1"
 # half-finished theme still switches everything it does define.
 copy() {
   local src=$1 dst=$2
+  if [ "$SEED" = 1 ] && [ -f "$dst" ]; then
+    return 0
+  fi
   if [ -f "$src" ]; then
     mkdir -p "$(dirname "$dst")"
     cp "$src" "$dst"
@@ -35,12 +48,23 @@ copy "$SRC/git/themes/$NAME.gitconfig"        "$HOME/.config/git/current-theme.g
 copy "$SRC/zsh/themes/$NAME.zsh"              "$HOME/.config/zsh/current-theme.zsh"
 copy "$SRC/nvim/themes/$NAME.lua"             "$HOME/.config/nvim/colors/dotfiles.lua"
 copy "$SRC/zellij/palettes/$NAME.kdl"         "$HOME/.config/zellij/themes/dotfiles.kdl"
+copy "$SRC/zed/palettes/$NAME.json"           "$HOME/.config/zed/themes/dotfiles.json"
 
 # oh-my-posh goes through set-prompt so a chosen shape survives the switch
 OMP_STATE="$HOME/.config/oh-my-posh"
 mkdir -p "$OMP_STATE"
-echo "$NAME" >"$OMP_STATE/current-theme.name"
-"$DOTFILES/scripts/set-prompt.sh" "$(cat "$OMP_STATE/current-shape.name" 2>/dev/null || echo default)"
+if [ "$SEED" = 0 ] || [ ! -f "$OMP_STATE/current-theme.name" ]; then
+  echo "$NAME" >"$OMP_STATE/current-theme.name"
+fi
+if [ "$SEED" = 0 ] || [ ! -f "$OMP_STATE/current.omp.json" ]; then
+  "$DOTFILES/scripts/set-prompt.sh" "$(cat "$OMP_STATE/current-shape.name" 2>/dev/null || echo default)"
+fi
+
+if [ "$SEED" = 1 ]; then
+  echo "seeded defaults from $NAME"
+  exit 0
+fi
+
 echo "theme -> $NAME"
 
 # live-reload kitty (remote control)

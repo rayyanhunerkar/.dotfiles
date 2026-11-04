@@ -4,7 +4,8 @@
 import json
 import os
 
-D = os.path.expanduser("~/.dotfiles/.config")
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+D = os.path.join(REPO, ".config")
 
 # name -> palette + closest bat built-in theme
 T = {
@@ -125,6 +126,58 @@ T = {
         "extra": "#a48fd0",
         "bat": "OneHalfDark",
     },
+    "greenpath": {
+        "bg": "#0b1410",
+        "fg": "#e3efe2",
+        "dim": "#6a8574",
+        "line": "#26392d",
+        "accent": "#8fcf6e",
+        "alt": "#5fa8c4",
+        "warn": "#e0b64f",
+        "bad": "#d9625a",
+        "good": "#57c7a0",
+        "extra": "#b08fc7",
+        "bat": "gruvbox-dark",
+    },
+    "crystal-peak": {
+        "bg": "#15111c",
+        "fg": "#f3e8f2",
+        "dim": "#85759a",
+        "line": "#3a2d4a",
+        "accent": "#f27fc0",
+        "alt": "#84dcdc",
+        "warn": "#f2c078",
+        "bad": "#e8566f",
+        "good": "#7fd4b0",
+        "extra": "#8fb4f0",
+        "bat": "Dracula",
+    },
+    "castlevania": {
+        "bg": "#120a10",
+        "fg": "#efe3da",
+        "dim": "#8f7482",
+        "line": "#3e2230",
+        "accent": "#e8455a",
+        "alt": "#7fa6d6",
+        "warn": "#eeb04a",
+        "bad": "#ff7a66",
+        "good": "#7fb08a",
+        "extra": "#a77fd1",
+        "bat": "Dracula",
+    },
+    "black-gold": {
+        "bg": "#000000",
+        "fg": "#f5ecd6",
+        "dim": "#8a7a52",
+        "line": "#332a14",
+        "accent": "#d4af37",
+        "alt": "#f5d76e",
+        "warn": "#ff9f1c",
+        "bad": "#e5484d",
+        "good": "#a3b86c",
+        "extra": "#dba392",
+        "bat": "gruvbox-dark",
+    },
     "y2k-vaporwave": {
         "bg": "#150a2e",
         "fg": "#f4ecff",
@@ -140,6 +193,59 @@ T = {
     },
 }
 
+
+def zellij_theme(name, p):
+    """Component styles, not the 11-color palette: zellij paints the selected tab
+    and pane frame from a legacy theme's `green`, so every theme came out green."""
+
+    def style(node, base, background, emphasis):
+        lines = [f"        {node} {{", f'            base "{p[base]}"']
+        if background:
+            lines.append(f'            background "{p[background]}"')
+        lines += [
+            f'            emphasis_{i} "{p[role]}"' for i, role in enumerate(emphasis)
+        ]
+        return lines + ["        }"]
+
+    text = ("warn", "accent", "good", "extra")
+    ribbon = ("bad", "warn", "extra", "alt")
+    frame = ("warn", "alt", "extra", "good")
+    players = ("accent", "alt", "extra", "warn", "good", "bad")
+
+    body = []
+    for node, base, background, emphasis in (
+        ("text_unselected", "fg", "bg", text),
+        ("text_selected", "fg", "line", text),
+        ("ribbon_unselected", "fg", "line", ribbon),
+        ("ribbon_selected", "bg", "accent", ribbon),
+        ("table_title", "accent", "bg", text),
+        ("table_cell_unselected", "fg", "bg", text),
+        ("table_cell_selected", "fg", "line", text),
+        ("list_unselected", "fg", "bg", text),
+        ("list_selected", "fg", "line", text),
+        ("frame_unselected", "line", None, frame),
+        ("frame_selected", "accent", None, frame),
+        ("frame_highlight", "warn", None, ("extra", "accent", "warn", "bad")),
+        ("exit_code_success", "good", None, frame),
+        ("exit_code_error", "bad", None, frame),
+    ):
+        body += style(node, base, background, emphasis)
+
+    body.append("        multiplayer_user_colors {")
+    body += [
+        f'            player_{i + 1} "{p[players[i % len(players)]]}"'
+        for i in range(10)
+    ]
+    body.append("        }")
+
+    return (
+        f"// {name} — zellij colors. Copied to ~/.config/zellij/themes/dotfiles.kdl\n"
+        "// by `set-theme`, and zellij reloads that directory on its own.\n"
+        "// Always named `dotfiles`, the name config.kdl selects.\n"
+        "themes {\n    dotfiles {\n" + "\n".join(body) + "\n    }\n}\n"
+    )
+
+
 os.makedirs(f"{D}/git/themes", exist_ok=True)
 os.makedirs(f"{D}/zsh/themes", exist_ok=True)
 os.makedirs(f"{D}/oh-my-posh/palettes", exist_ok=True)
@@ -153,24 +259,7 @@ for name, p in T.items():
 
     # -------------------------------------------------------------- zellij ---
     with open(f"{D}/zellij/palettes/{name}.kdl", "w") as f:
-        f.write(f"""// {name} — zellij colors. Copied to ~/.config/zellij/themes/dotfiles.kdl
-// by `set-theme`. Always named `dotfiles`, the name config.kdl selects.
-themes {{
-    dotfiles {{
-        fg "{p["fg"]}"
-        bg "{p["line"]}"
-        black "{p["bg"]}"
-        red "{p["bad"]}"
-        green "{p["good"]}"
-        yellow "{p["warn"]}"
-        blue "{p["alt"]}"
-        magenta "{p["extra"]}"
-        cyan "{p["accent"]}"
-        white "{p["fg"]}"
-        orange "{p["warn"]}"
-    }}
-}}
-""")
+        f.write(zellij_theme(name, p))
 
     # ---------------------------------------------------------- git colors ---
     with open(f"{D}/git/themes/{name}.gitconfig", "w") as f:

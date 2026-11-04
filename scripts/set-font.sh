@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Switch the kitty font. Usage: set-font.sh <jetbrains-mono|victor-mono|maple-mono>
+# Switch the kitty font. Usage: set-font.sh <name>   — run with no args to list what's available.
 set -euo pipefail
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -19,5 +19,8 @@ echo "current-font.conf -> $1"
 # live-reload any running kitty instances with remote control on
 for sock in /tmp/kitty-*; do
   [ -S "$sock" ] || continue
-  kitty @ --to "unix:$sock" load-config 2>/dev/null && echo "reloaded $sock"
+  # `if`, not `&&`: a stale socket must not become this script's exit status.
+  if kitty @ --to "unix:$sock" load-config 2>/dev/null; then
+    echo "reloaded $sock"
+  fi
 done

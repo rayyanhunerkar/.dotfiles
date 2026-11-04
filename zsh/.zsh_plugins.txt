@@ -7,7 +7,6 @@ ohmyzsh/ohmyzsh path:lib/clipboard.zsh
 
 # Essentials
 zsh-users/zsh-autosuggestions
-zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-completions
 
 # Safety — a pasted multi-line blob is never auto-executed.
@@ -41,6 +40,8 @@ ohmyzsh/ohmyzsh path:plugins/python
 # silently steal ga/glo/gd/gco/grb from the git plugin above.
 wfxr/forgit
 
-# Fuzzy completion and history
+# Fuzzy completion
 Aloxaf/fzf-tab
-joshskidmore/zsh-fzf-history-search
+
+# Last: it wraps ZLE widgets, so anything defined after it goes unhighlighted.
+zsh-users/zsh-syntax-highlighting
